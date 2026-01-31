@@ -1,5 +1,5 @@
 import apiService from '@/services/network';
-import API_ENDPOINT from '@/api/endpoint';
+import API_ENDPOINT from '../endpoint';
 interface LoginPayload {
     companyCode: string;
 }

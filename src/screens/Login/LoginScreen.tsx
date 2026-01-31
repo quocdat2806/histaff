@@ -59,7 +59,7 @@ export const LoginScreen = (_props: Props) => {
     } catch (err: any) {
       const error = err as ApiError;
       const errorMessage = error?.message;
-      showAlert({ title: 'Login Error', message: errorMessage, showIcon: false, primaryAction: { label: 'OK', onPress: () => { hideAlert(); } } });
+      showAlert({ title: 'Login Error', message: errorMessage, primaryAction: { label: 'OK', onPress: () => {} } });
     } finally {
       setLoading(false);
     }

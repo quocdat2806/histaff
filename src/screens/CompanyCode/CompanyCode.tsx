@@ -53,7 +53,7 @@ export const CompanyCodeScreen = ({ navigation }: Props) => {
     } catch (err) {
       const apiError = err as ApiError;
       const errorMessage = apiError?.message;
-      showAlert({ title: 'Login Error', message: errorMessage, showIcon: false, primaryAction: { label: 'OK', onPress: () => { hideAlert(); } } });
+      showAlert({ title: 'Login Error', message: errorMessage, primaryAction: { label: 'OK', onPress: () => {} } });
     } finally {
       setLoading(false);
     }

@@ -36,6 +36,7 @@ export const BorderRadius = {
   xxxxl: 24,
   xxxxxl: 28,
   xxxxxxl: 32,
+  rounded: 9999,
 };
 
 export const IconSize = {
@@ -46,6 +47,7 @@ export const IconSize = {
 export const Layout = {
   tabBarHeight: 80,
   buttonMaxWidth: 200,
+  avatarSizeDefault: 48,
 };
 export const Width = {
   modalWidth: 320,

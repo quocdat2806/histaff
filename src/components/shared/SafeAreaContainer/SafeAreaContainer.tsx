@@ -1,12 +1,36 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View } from 'react-native';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import AppStyles from '@/style';
+import { Colors } from '@/constants/colors';
+
+type SafeAreaContainerProps = {
+  children: React.ReactNode;
+};
+
 export const SafeAreaContainer = ({
   children,
-}: {
-  children: React.ReactNode;
-}) => {
-  return <SafeAreaView style={AppStyles.f_1}>{children}</SafeAreaView>;
+}: SafeAreaContainerProps) => {
+  const insets = useSafeAreaInsets();
+  const statusBarStyle = useMemo(() => {
+    return {
+      height: insets.top,
+      backgroundColor: Colors.primary,
+    };
+  }, [insets.top]);
+
+  return (
+    <View style={[AppStyles.f_1]}>
+      <View style={statusBarStyle} />
+      <SafeAreaView
+        style={[AppStyles.f_1]}
+        edges={['left', 'right', 'bottom']}
+      >
+        {children}
+      </SafeAreaView>
+    </View>
+  );
 };
+

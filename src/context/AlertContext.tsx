@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback, useMemo } from 'react';
 
-import { AppModal, AppModalProps } from '@/components/shared/Alert/AlertModal';
-
+import { AppModal, AppModalProps, ModalAction } from '@/components/shared/Alert/AlertModal';
 
 type GlobalAlertConfig = Omit<AppModalProps, 'visible' | 'onClose'>;
 
@@ -10,7 +9,6 @@ export interface AlertOptions {
     message?: string;
     onConfirm?: () => void;
     onCancel?: () => void;
-    showIcon?: boolean;
 }
 
 interface AlertContextProps {
@@ -49,12 +47,10 @@ export const AlertProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     }, []);
 
     const showSuccess = useCallback(
-        ({ title, message, onConfirm, showIcon = true }: AlertOptions) => {
+        ({ title, message, onConfirm }: AlertOptions) => {
             showAlert({
-                type: 'success',
                 title,
                 message,
-                showIcon,
                 primaryAction: {
                     label: 'OK',
                     onPress: () => {
@@ -62,19 +58,17 @@ export const AlertProvider: React.FC<{ children: ReactNode }> = ({ children }) =
                         onConfirm?.();
                     },
                 },
-                dismissable: true,
+                dismissAble: true,
             });
         },
         [showAlert, hideAlert]
     );
 
     const showError = useCallback(
-        ({ title, message, onConfirm, showIcon = true }: AlertOptions) => {
+        ({ title, message, onConfirm }: AlertOptions) => {
             showAlert({
-                type: 'error',
                 title,
                 message,
-                showIcon,
                 primaryAction: {
                     label: 'Đóng',
                     onPress: () => {
@@ -82,19 +76,17 @@ export const AlertProvider: React.FC<{ children: ReactNode }> = ({ children }) =
                         onConfirm?.();
                     },
                 },
-                dismissable: true,
+                dismissAble: true,
             });
         },
         [showAlert, hideAlert]
     );
 
     const showConfirm = useCallback(
-        ({ title, message, onConfirm, onCancel, showIcon = true }: AlertOptions) => {
+        ({ title, message, onConfirm, onCancel }: AlertOptions) => {
             showAlert({
-                type: 'warning',
                 title,
                 message,
-                showIcon,
                 primaryAction: {
                     label: 'Xác nhận',
                     onPress: () => {
@@ -109,19 +101,17 @@ export const AlertProvider: React.FC<{ children: ReactNode }> = ({ children }) =
                         onCancel?.();
                     },
                 },
-                dismissable: false,
+                dismissAble: false,
             });
         },
         [showAlert, hideAlert]
     );
 
     const showInfo = useCallback(
-        ({ title, message, onConfirm, showIcon = true }: AlertOptions) => {
+        ({ title, message, onConfirm }: AlertOptions) => {
             showAlert({
-                type: 'info',
                 title,
                 message,
-                showIcon,
                 primaryAction: {
                     label: 'OK',
                     onPress: () => {
@@ -129,11 +119,27 @@ export const AlertProvider: React.FC<{ children: ReactNode }> = ({ children }) =
                         onConfirm?.();
                     },
                 },
-                dismissable: true,
+                dismissAble: true,
             });
         },
         [showAlert, hideAlert]
     );
+
+    const wrappedConfig = useMemo(() => {
+        const wrapAction = (action: ModalAction): ModalAction => ({
+            ...action,
+            onPress: () => {
+                hideAlert();
+                action.onPress();
+            },
+        });
+        return {
+            ...config,
+            primaryAction: config.primaryAction ? wrapAction(config.primaryAction) : undefined,
+            secondaryAction: config.secondaryAction ? wrapAction(config.secondaryAction) : undefined,
+            actions: config.actions?.map(wrapAction),
+        };
+    }, [config, hideAlert]);
 
     return (
         <AlertContext.Provider
@@ -148,10 +154,9 @@ export const AlertProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         >
             {children}
             <AppModal
-
                 visible={visible}
                 onClose={hideAlert}
-                {...config}
+                {...wrappedConfig}
             />
         </AlertContext.Provider>
     );

@@ -16,5 +16,11 @@ export const Colors = {
   placeholder: '#999999',
   disabled: '#E0E0E0',
   primary:'#0E96EB',
-  
+  skeleton: '#E0E0E0',
+  backgroundImageError: '#F5F5F5',
+  mutedImageError: '#CCCCCC',
+  online: '#4CAF50',
+  offline: '#BDBDBD',
+  busy: '#F44336',
+  away: '#FFC107',
 };
