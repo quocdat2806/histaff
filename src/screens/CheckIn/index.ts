@@ -1,2 +1,0 @@
-export { CheckInScreen } from './CheckInScreen';
-

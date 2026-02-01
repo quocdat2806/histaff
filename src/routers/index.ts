@@ -12,5 +12,7 @@ const ROUTERS = {
     CheckIn: 'CheckIn',
     Contact: 'Contact',
     MainTabs: 'MainTabs',
+    Approve: 'Approve',
+    RegisterLeave: 'RegisterLeave',
 } as const
 export default ROUTERS

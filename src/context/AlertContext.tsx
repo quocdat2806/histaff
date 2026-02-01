@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode, useCallback, useMemo } from 'react';
 
-import { AppModal, AppModalProps, ModalAction } from '@/components/shared/Alert/AlertModal';
+import { AppModal, AppModalProps, ModalAction } from '@/components/shared';
 
 type GlobalAlertConfig = Omit<AppModalProps, 'visible' | 'onClose'>;
 

@@ -4,15 +4,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import ROUTERS from '@/routers';
 import { MainTabParamList } from './types';
-import { HomeScreen } from '@/screens/Home';
-import { ContactScreen } from '@/screens/Contact';
-import { CheckInScreen } from '@/screens/CheckIn';
-import { ProfileScreen } from '@/screens/Profile';
-import { NotificationScreen } from '@/screens/Notification';
+import { HomeScreen } from '@/screens';
+import { ContactScreen } from '@/screens';
+import { CheckInScreen } from '@/screens';
+import { ProfileScreen } from '@/screens';
+import { NotificationScreen } from '@/screens';
 
 
 import { useTranslation } from '@/hooks/useTranslation';
-import { SvgGPS, SvgHome, SvgNotification, SvgPhoneBook } from '../../assets/svgs';
+import { SvgGPS, SvgHome, SvgNotification, SvgPhoneBook } from '@assets/svgs';
 
 import { Colors } from '@/constants/colors';
 const Tab = createBottomTabNavigator<MainTabParamList>();

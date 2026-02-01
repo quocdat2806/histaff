@@ -23,4 +23,5 @@ export const Colors = {
   offline: '#BDBDBD',
   busy: '#F44336',
   away: '#FFC107',
+  modalBackground: 'rgba(0, 0, 0, 0.5)',
 };

@@ -1,2 +1,0 @@
-export { CompanyCodeScreen } from './CompanyCode';
-

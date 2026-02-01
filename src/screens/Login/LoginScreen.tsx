@@ -23,13 +23,13 @@ import { Colors } from '@/constants/colors';
 
 import { ApiError } from '@/services/network';
 
-import { AppInput } from '@/components/ui/Input/Input';
-import { AppButton } from '@/components/ui/Button/Button';
+import { AppInput } from '@/components/ui/Input';
+import { AppButton } from '@/components/ui/Button';
 
-import { ImageAssets } from '../../../assets';
+import { ImageAssets } from '@assets';
 
 
-import { Subtitle } from '@/components/ui/Text/Text';
+import { Subtitle } from '@/components/ui/Text';
 
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
