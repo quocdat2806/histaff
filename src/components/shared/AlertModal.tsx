@@ -3,8 +3,6 @@ import { Modal, View, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { AppText } from '@/components/ui';
 import { AppButton } from '@/components/ui';
-import { Colors } from '@/constants/colors';
-import { BorderRadius, Spacing, FontSize, Width } from '@/constants/dimens';
 import AppStyles from '@/style';
 
 export interface ModalAction {
@@ -42,7 +40,7 @@ export const AppModal: React.FC<AppModalProps> = ({
   const renderActions = () => {
     if (actions && actions.length > 0) {
       return (
-        <View style={styles.actionsContainer}>
+        <View style={[AppStyles.paddingTop0, AppStyles.padding16]}>
           {actions.map((action, index) => (
             <AppButton
               key={index}
@@ -52,7 +50,7 @@ export const AppModal: React.FC<AppModalProps> = ({
               loading={action.loading}
               disabled={action.disabled}
               fullWidth
-              style={index > 0 ? styles.actionButton : undefined}
+              style={index > 0 ? AppStyles.marginTop10 : undefined}
             />
           ))}
         </View>
@@ -60,7 +58,7 @@ export const AppModal: React.FC<AppModalProps> = ({
     }
     if (primaryAction && !secondaryAction) {
       return (
-        <View style={styles.actionsContainer}>
+        <View style={[AppStyles.paddingTop0, AppStyles.padding16]}>
           <AppButton
             label={primaryAction.label}
             onPress={primaryAction.onPress}
@@ -74,14 +72,21 @@ export const AppModal: React.FC<AppModalProps> = ({
     }
     if (primaryAction && secondaryAction) {
       return (
-        <View style={[AppStyles.f_Row, styles.twoActionsContainer]}>
+        <View
+          style={[
+            AppStyles.f_Row,
+            AppStyles.paddingTop0,
+            AppStyles.padding16,
+            AppStyles.gap10,
+          ]}
+        >
           <AppButton
             label={secondaryAction.label}
             onPress={secondaryAction.onPress}
             variant="primary"
             loading={secondaryAction.loading}
             disabled={secondaryAction.disabled}
-            style={styles.twoActionButton}
+            style={AppStyles.f_1}
           />
           <AppButton
             label={primaryAction.label}
@@ -89,7 +94,7 @@ export const AppModal: React.FC<AppModalProps> = ({
             variant="primary"
             loading={primaryAction.loading}
             disabled={primaryAction.disabled}
-            style={styles.twoActionButton}
+            style={AppStyles.f_1}
           />
         </View>
       );
@@ -107,10 +112,11 @@ export const AppModal: React.FC<AppModalProps> = ({
     >
       <View
         style={[
-          styles.overlay,
+          AppStyles.backGroundModal,
           AppStyles.f_1,
           AppStyles.a_center,
           AppStyles.j_center,
+          AppStyles.padding16,
         ]}
       >
         <TouchableOpacity
@@ -118,20 +124,23 @@ export const AppModal: React.FC<AppModalProps> = ({
           activeOpacity={1}
           onPress={handleBackdropPress}
         />
-        <View style={styles.modalContainer}>
-          <View style={styles.content}>
+        <View
+          style={[
+            AppStyles.modalContainer,
+            AppStyles.backGroundWhite,
+            AppStyles.borderRadius12,
+          ]}
+        >
+          <View
+            style={[AppStyles.padding20, AppStyles.a_center, AppStyles.gap8]}
+          >
             {title ? (
-              <AppText variant="h4" fontType="bold" center style={styles.title}>
+              <AppText variant="h4" fontType="bold" center>
                 {title}
               </AppText>
             ) : null}
             {message ? (
-              <AppText
-                variant="body"
-                color="secondary"
-                center
-                style={styles.message}
-              >
+              <AppText color="secondary" center>
                 {message}
               </AppText>
             ) : null}
@@ -142,42 +151,3 @@ export const AppModal: React.FC<AppModalProps> = ({
     </Modal>
   );
 };
-
-const styles = StyleSheet.create({
-  overlay: {
-    backgroundColor: Colors.modalBackground,
-    padding: Spacing.lg,
-  },
-  modalContainer: {
-    width: Width.fullScreenDimensionWidth * 0.85,
-    maxWidth: 400,
-    backgroundColor: Colors.white,
-    borderRadius: BorderRadius.xl,
-    overflow: 'hidden',
-  },
-  content: {
-    padding: Spacing.xl,
-    alignItems: 'center',
-  },
-  title: {
-    marginBottom: Spacing.sm,
-  },
-  message: {
-    lineHeight: FontSize.body * 1.6,
-  },
-  actionsContainer: {
-    padding: Spacing.lg,
-    paddingTop: 0,
-  },
-  actionButton: {
-    marginTop: Spacing.sm,
-  },
-  twoActionsContainer: {
-    padding: Spacing.lg,
-    paddingTop: 0,
-    gap: Spacing.sm,
-  },
-  twoActionButton: {
-    flex: 1,
-  },
-});

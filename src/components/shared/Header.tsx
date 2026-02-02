@@ -1,10 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
 import AppStyles from '@/style';
 import { AppText } from '@/components/ui';
-import { Colors } from '@/constants/colors';
-import { IconSize, Spacing } from '@/constants/dimens';
+import { IconSize } from '@/constants/dimens';
 import { BackIcon } from '@assets/svgs';
 import { goBack } from '@/navigation';
 
@@ -20,7 +19,11 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   actions,
 }) => {
   return (
-    <View style={[AppStyles.f_Row, AppStyles.a_center, styles.container]}>
+    <View style={[AppStyles.f_Row, AppStyles.a_center, 
+    AppStyles.backGroundPrimary,
+    AppStyles.paddingHorizontal12,
+    AppStyles.paddingVertical8,
+    ]}>
       {isShowBackIcon ? (
         <TouchableOpacity onPress={goBack} hitSlop={8}>
           <BackIcon width={IconSize.md} height={IconSize.md} />
@@ -34,10 +37,3 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Colors.primary,
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.xs,
-  },
-});

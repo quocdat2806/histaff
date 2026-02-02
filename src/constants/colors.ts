@@ -24,4 +24,5 @@ export const Colors = {
   busy: '#F44336',
   away: '#FFC107',
   modalBackground: 'rgba(0, 0, 0, 0.5)',
+  transparent: 'transparent',
 };

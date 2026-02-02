@@ -1,7 +1,6 @@
-import React, { useMemo } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 
-import { navigate } from '@/navigation';
 import { MainTabParamList } from '@/navigation/types';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
@@ -12,23 +11,27 @@ import { scale } from 'react-native-size-matters';
 import { Heading3, Heading6 } from '@/components/ui/Text';
 import AppStyles from '@/style';
 
-import { Spacing, Width } from '@/constants/dimens';
+import {  Layout, Width } from '@/constants/dimens';
 import { Colors } from '@/constants/colors';
 
 import { useSharedValue } from 'react-native-reanimated';
 import Carousel, { ICarouselInstance } from 'react-native-reanimated-carousel';
 import HomeItem, { HOME_GRID_DATA } from './components/HomeItem';
 
+import { useTranslation } from '@/hooks/useTranslation';
+
 import {
   SvgBusinessCard,
- 
 } from '@assets/svgs';
 const data = [...new Array(6).keys()];
 
 type Props = BottomTabScreenProps<MainTabParamList, 'Home'>;
 
+
+const DEFAULT_AVATAR_URL = 'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2024/11/tai-hinh-nen-dep-mien-phi-3.jpg';
 export const HomeScreen = (_props: Props) => {
   const user = useAuthStore(state => state.user);
+  const { t } = useTranslation();
 
   const ref = React.useRef<ICarouselInstance>(null);
   const progress = useSharedValue<number>(0);
@@ -49,21 +52,23 @@ export const HomeScreen = (_props: Props) => {
           AppStyles.f_Row,
           AppStyles.j_spaceBetween,
           AppStyles.a_center,
-          styles.gap8,
-          styles.headerContainer,
+          AppStyles.paddingHorizontal16,
+          AppStyles.paddingVertical8,
+          AppStyles.backGroundPrimary,
+          AppStyles.gap8,
         ]}
       >
         <UserAvatar
-          size={scale(58)}
+          size={Layout.avatarSizeLarge}
           showStatus={false}
           source={{
-            uri: 'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2024/11/tai-hinh-nen-dep-mien-phi-3.jpg',
+            uri: DEFAULT_AVATAR_URL,
           }}
         />
         <View style={[AppStyles.f_1, AppStyles.a_start]}>
-          <Heading6 color={Colors.white}>Hello</Heading6>
+          <Heading6 color={Colors.white}>{t('hello')}</Heading6>
           <Heading3 fontType="bold" color={Colors.white}>
-            Hello
+            {t('hello')}
           </Heading3>
         </View>
         <SvgBusinessCard />
@@ -91,14 +96,3 @@ export const HomeScreen = (_props: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  gap8: {
-    gap: Spacing.xs,
-  },
-  headerContainer: {
-    paddingHorizontal: Spacing.lg,
-    paddingVertical: Spacing.xs,
-    backgroundColor: Colors.primary,
-  },
-
-});

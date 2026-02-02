@@ -4,11 +4,9 @@ import {
   FlatListProps,
   StyleProp,
   ViewStyle,
-  StyleSheet,
 } from 'react-native';
 
 import AppStyles from '@/style';
-import { Spacing } from '@/constants/dimens';
 import { AppEmptyList, AppEmptyListProps } from './EmptyList';
 
 export interface AppGridProps<ItemT>
@@ -58,14 +56,15 @@ export function AppGrid<ItemT>({
   );
   const resolvedContentContainerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [
-      styles.contentContainer,
+      AppStyles.paddingVertical12,
+      AppStyles.flexGrow1,
       hasData
         ? null
         : [
-            styles.emptyContentContainer,
+            AppStyles.paddingVertical20,
             AppStyles.j_center,
             AppStyles.a_center,
-            styles.containerStyle,
+            AppStyles.flexGrow1,
           ],
       contentContainerStyle,
     ],
@@ -86,15 +85,3 @@ export function AppGrid<ItemT>({
   );
 }
 
-const styles = StyleSheet.create({
-  contentContainer: {
-    flexGrow: 1,
-    paddingVertical: Spacing.md,
-  },
-  emptyContentContainer: {
-    paddingVertical: Spacing.xl,
-  },
-  containerStyle: {
-    flexGrow: 1,
-  },
-});

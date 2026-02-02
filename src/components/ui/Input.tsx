@@ -4,12 +4,11 @@ import {
   TextInputProps,
   View,
   TouchableOpacity,
-  StyleSheet,
   ViewStyle,
   TextStyle,
 } from 'react-native';
 import { AppText } from './Text';
-import { FontSize, Spacing, BorderRadius } from '@/constants/dimens';
+import { FontSize, } from '@/constants/dimens';
 import { Colors } from '@/constants/colors';
 import AppStyles from '@/style';
 type InputVariant = 'outlined' | 'filled';
@@ -43,7 +42,7 @@ export interface AppInputProps extends TextInputProps {
 
   containerStyle?: ViewStyle;
   inputContainerStyle?: ViewStyle;
-  lableColor?: string;
+  labelColor?: string;
 }
 
 export const AppInput = forwardRef<TextInput, AppInputProps>(
@@ -76,7 +75,7 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
       size = 'md',
       disabled = false,
       loading = false,
-      lableColor = Colors.black,
+      labelColor = Colors.black,
 
       containerStyle,
       inputContainerStyle,
@@ -117,12 +116,17 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
       const baseStyle =
         variant === 'outlined'
           ? {
-              ...styles.inputContainerOutlined,
+              ...AppStyles.borderDefault,
+              ...AppStyles.border1,
+             ...AppStyles.borderRadius12,
+             ...AppStyles.backGroundWhite,
               ...AppStyles.f_Row,
               ...AppStyles.a_center,
             }
           : {
-              ...styles.inputContainerFilled,
+              ...AppStyles.border0,
+              ...AppStyles.borderRadius12,
+              ...AppStyles.backGroundInput,
               ...AppStyles.f_Row,
               ...AppStyles.a_center,
             };
@@ -132,15 +136,15 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
       let stateStyle: ViewStyle = {};
 
       if (hasError) {
-        stateStyle = styles.inputContainerError;
+        stateStyle = { ...AppStyles.borderError, ...AppStyles.border1 };
       } else if (success) {
-        stateStyle = styles.inputContainerSuccess;
+        stateStyle = { ...AppStyles.borderSuccess, ...AppStyles.border1 };
       } else if (isFocused) {
-        stateStyle = styles.inputContainerFocused;
+        stateStyle = { ...AppStyles.borderDefault, ...AppStyles.border2 };
       }
 
       if (isDisabled) {
-        stateStyle = { ...stateStyle, ...styles.inputContainerDisabled };
+        stateStyle = { ...stateStyle, ...AppStyles.backGroundDisabled, ...AppStyles.opacity06 };
       }
 
       return { ...baseStyle, ...sizeStyle, ...stateStyle };
@@ -155,8 +159,8 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
     return (
       <View style={[ containerStyle]}>
         {label && (
-          <View style={styles.labelContainer}>
-            <AppText color={lableColor} variant="body" fontType="medium">
+          <View style={[AppStyles.marginBottom8]}>
+            <AppText color={labelColor} variant="body" fontType="medium">
               {label}
               {required && <AppText color="error"> *</AppText>}
             </AppText>
@@ -167,7 +171,7 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
           {leftIcon && (
             <View
               style={[
-                styles.leftIconContainer,
+                AppStyles.marginLeft12,
                 AppStyles.a_center,
                 AppStyles.j_center,
               ]}
@@ -189,11 +193,13 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
             onBlur={handleBlur}
             maxLength={maxLength}
             style={[
-              styles.input,
+              AppStyles.defaultInputStyle,
+              AppStyles.padding0,
+              AppStyles.f_1,
               inputSizeStyles[size],
-              leftIcon ? styles.inputWithLeftIcon : undefined,
+              leftIcon ? AppStyles.marginLeft8 : undefined,
               showClearButton || showPasswordButton || rightIcon
-                ? styles.inputWithRightIcon
+                ? AppStyles.marginRight8
                 : undefined,
               style,
             ]}
@@ -202,7 +208,7 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
 
           <View
             style={[
-              styles.rightContainer,
+              AppStyles.marginRight12,
               AppStyles.a_center,
               AppStyles.j_center,
             ]}
@@ -211,11 +217,10 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
               <TouchableOpacity
                 onPress={handleClear}
                 style={[
-                  styles.iconButton,
                   AppStyles.a_center,
                   AppStyles.j_center,
                 ]}
-                hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                hitSlop={10}
               >
                 <AppText>✕</AppText>
               </TouchableOpacity>
@@ -225,7 +230,6 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
               <TouchableOpacity
                 onPress={togglePasswordVisibility}
                 style={[
-                  styles.iconButton,
                   AppStyles.a_center,
                   AppStyles.j_center,
                 ]}
@@ -239,7 +243,6 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
               <TouchableOpacity
                 onPress={onRightIconPress}
                 style={[
-                  styles.iconButton,
                   AppStyles.a_center,
                   AppStyles.j_center,
                 ]}
@@ -255,7 +258,8 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
         {(helperText || error || showCounter) && (
           <View
             style={[
-              styles.bottomContainer,
+              AppStyles.marginTop8,
+              AppStyles.paddingHorizontal8,
               AppStyles.a_center,
               AppStyles.j_center,
             ]}
@@ -285,85 +289,22 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
   },
 );
 
-const styles = StyleSheet.create({
-
-  labelContainer: {
-    marginBottom: Spacing.xs,
-  },
-
-  inputContainerOutlined: {
-    borderRadius: BorderRadius.xl,
-    borderWidth: 1,
-    borderColor: Colors.border,
-    backgroundColor: Colors.white,
-  },
-  inputContainerFilled: {
-    borderRadius: BorderRadius.xl,
-    borderWidth: 0,
-    backgroundColor: Colors.inputBackground,
-  },
-
-  inputContainerFocused: {
-    borderColor: Colors.border,
-    borderWidth: 2,
-  },
-  inputContainerError: {
-    borderColor: Colors.error,
-    borderWidth: 1,
-  },
-  inputContainerSuccess: {
-    borderColor: Colors.success,
-    borderWidth: 1,
-  },
-  inputContainerDisabled: {
-    backgroundColor: Colors.disabled,
-    opacity: 0.6,
-  },
-
-  input: {
-    flex: 1,
-    fontSize: FontSize.body,
-    color: Colors.black,
-    padding: 0,
-  },
-  inputWithLeftIcon: {
-    marginLeft: Spacing.xs,
-  },
-  inputWithRightIcon: {
-    marginRight: Spacing.xs,
-  },
-
-  leftIconContainer: {
-    marginLeft: Spacing.md,
-  },
-  rightContainer: {
-    marginRight: Spacing.md,
-  },
-  iconButton: {
-    // padding: Spacing.xs,
-  },
-
-  bottomContainer: {
-    marginTop: Spacing.xs,
-    paddingHorizontal: Spacing.xs,
-  },
-});
 
 const sizeStyles: Record<InputSize, ViewStyle> = {
   sm: {
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.sm,
-    minHeight: 36,
+    ...AppStyles.paddingHorizontal12,
+    ...AppStyles.paddingVertical10,
+    ...AppStyles.inputHeight36,
   },
   md: {
-    paddingHorizontal: Spacing.lg,
-    paddingVertical: Spacing.md,
-    minHeight: 44,
+    ...AppStyles.paddingHorizontal16,
+    ...AppStyles.paddingVertical12,
+    ...AppStyles.inputHeight44,
   },
   lg: {
-    paddingHorizontal: Spacing.xl,
-    paddingVertical: Spacing.lg,
-    minHeight: 52,
+    ...AppStyles.paddingHorizontal20,
+    ...AppStyles.paddingVertical16,
+    ...AppStyles.inputHeight52,
   },
 };
 

@@ -48,6 +48,7 @@ export const Layout = {
   tabBarHeight: 80,
   buttonMaxWidth: 200,
   avatarSizeDefault: 48,
+  avatarSizeLarge: 58,
 };
 export const Width = {
   modalWidth: 320,

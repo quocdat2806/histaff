@@ -7,7 +7,7 @@ import axios, {
 } from 'axios';
 import * as Keychain from 'react-native-keychain';
 
-const DEV_FALLBACK_TOKEN = 'temp-token';
+const DEV_FALLBACK_TOKEN = 'vlxxxxxx';
 
 interface ApiConfig {
   baseURL: string;

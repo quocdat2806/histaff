@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import { z } from 'zod';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
@@ -63,7 +63,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   return (
     <View >
       {label && (
-        <AppText   variant="body" fontType="medium" >
+        <AppText  fontType="medium" >
           {label}
           {required && <AppText color={Colors.error}> *</AppText>}
         </AppText>

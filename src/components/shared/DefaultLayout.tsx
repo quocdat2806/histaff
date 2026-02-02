@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { SafeAreaContainer } from './SafeAreaContainer';
 import { AppHeader } from './Header';
-import { Spacing } from '@/constants/dimens';
+import AppStyles from '@/style';
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
@@ -12,14 +12,9 @@ export const DefaultLayout = ({ children, title }: DefaultLayoutProps) => {
   return (
     <SafeAreaContainer>
       <AppHeader title={title} />
-      <View style={styles.container}>{children}</View>
+      <View style={[AppStyles.padding12,AppStyles.f_1]}>{children}</View>
     </SafeAreaContainer>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    padding: Spacing.md,
-    flex:1
-  },
-});
+

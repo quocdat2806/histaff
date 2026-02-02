@@ -4,11 +4,9 @@ import {
   SectionListProps,
   StyleProp,
   ViewStyle,
-  StyleSheet,
 } from 'react-native';
 
 import AppStyles from '@/style';
-import { Spacing } from '@/constants/dimens';
 import { AppEmptyList, AppEmptyListProps } from './EmptyList';
 
 export interface AppSectionListProps<ItemT, SectionT>
@@ -44,14 +42,15 @@ export function AppSectionList<ItemT, SectionT>({
 
   const resolvedContentContainerStyle = useMemo<StyleProp<ViewStyle>>(
     () => [
-      styles.contentContainer,
+      AppStyles.flexGrow1,
+      AppStyles.paddingVertical12,
       hasData
         ? null
         : [
-            styles.emptyContentContainer,
+            AppStyles.paddingVertical20,
             AppStyles.j_center,
             AppStyles.a_center,
-            styles.containerStyle,
+            AppStyles.flexGrow1,
           ],
       contentContainerStyle,
     ],
@@ -69,15 +68,3 @@ export function AppSectionList<ItemT, SectionT>({
   );
 }
 
-const styles = StyleSheet.create({
-  contentContainer: {
-    flexGrow: 1,
-    paddingVertical: Spacing.md,
-  },
-  emptyContentContainer: {
-    paddingVertical: Spacing.xl,
-  },
-  containerStyle: {
-    flexGrow: 1,
-  },
-});

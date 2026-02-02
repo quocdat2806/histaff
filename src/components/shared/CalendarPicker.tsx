@@ -1,23 +1,11 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import {
-  View,
-  TouchableWithoutFeedback,
-  Modal,
-  StyleSheet,
-} from 'react-native';
+import { View, TouchableWithoutFeedback, Modal } from 'react-native';
 import { Calendar, DateData } from 'react-native-calendars';
 import { Colors } from '@/constants/colors';
-import { Spacing, Width } from '@/constants/dimens';
 import { AppButton } from '../ui';
 import AppStyles from '@/style';
-
-function toYYYYMMDD(value: string | undefined): string {
-  const d = value ? new Date(value) : new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
-}
+import { toYYYYMMDD } from '@/utils/formatDate';
+import { Texts } from '@/constants/texts';
 
 export interface CalendarPickerModalProps {
   isVisible: boolean;
@@ -59,10 +47,23 @@ export function CalendarPickerModal({
       onRequestClose={onClose}
     >
       <TouchableWithoutFeedback onPress={handleBackdropPress}>
-        <View style={styles.container}>
+        <View
+          style={[
+            AppStyles.backGroundModal,
+            AppStyles.f_1,
+            AppStyles.a_center,
+            AppStyles.j_center,
+          ]}
+        >
           <TouchableWithoutFeedback>
-            <View style={styles.inner}>
-              <View style={styles.containerCalendar}>
+            <View
+              style={[
+                AppStyles.modalContainer,
+                AppStyles.borderRadius8,
+                AppStyles.marginHorizontal28,
+              ]}
+            >
+              <View style={[AppStyles.width100Percent]}>
                 <Calendar
                   current={currentDate}
                   enableSwipeMonths
@@ -83,13 +84,13 @@ export function CalendarPickerModal({
                   <AppButton
                     style={{ backgroundColor: 'transparent' }}
                     textStyle={{ color: Colors.black }}
-                    label="Hủy"
+                    label={Texts.cancel}
                     onPress={onClose}
                   />
                   <AppButton
                     textStyle={{ color: Colors.primary }}
                     style={{ backgroundColor: 'transparent' }}
-                    label="Chọn"
+                    label={Texts.select}
                     onPress={() => {}}
                   />
                 </View>
@@ -101,27 +102,3 @@ export function CalendarPickerModal({
     </Modal>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.modalBackground,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  inner: {
-    width: Width.fullScreenDimensionWidth * 0.85,
-    maxWidth: 340,
-    borderRadius: 6,
-    height: 'auto',
-    overflow: 'hidden',
-    marginHorizontal: 30,
-    backgroundColor: Colors.white,
-  },
-  containerCalendar: {
-    width: '100%',
-  },
-  buttonGroup: {
-    gap: Spacing.sm,
-  },
-});

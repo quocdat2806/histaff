@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
 
 import { AppText } from '@/components/ui/Text';
 import { AppInput } from '@/components/ui/Input';
 import { AppButton } from '@/components/ui/Button';
 import { SummaryRow } from '@/components/shared';
-import { Spacing } from '@/constants/dimens';
 import { Colors } from '@/constants/colors';
 import { DefaultLayout } from '@/components/shared';
 import { SvgRadioButton } from '@assets/svgs';
 import AppStyles from '@/style';
 import { useCalendarPicker } from '@/context/CalendarPickerContext';
+import { useTranslation } from '@/hooks/useTranslation';
 export const RegisterLeaveScreen = () => {
   const [selectedStartDate, setSelectedStartDate] = useState<string>('');
   const [selectedEndDate, setSelectedEndDate] = useState<string>('');
-  const { openCalendarPicker, closeCalendarPicker } = useCalendarPicker();
-
+  const { openCalendarPicker } = useCalendarPicker();
+  const { t } = useTranslation();
   const handleOpenCalendar = () => {
     openCalendarPicker({
       defaultDate: selectedStartDate || undefined,
@@ -33,75 +33,75 @@ export const RegisterLeaveScreen = () => {
     });
   };
   return (
-    <DefaultLayout title="Đăng ký nghỉ">
-      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
-          <View style={styles.row}>
-           <TouchableOpacity style={{ flex: 1 }} onPress={handleOpenCalendar}>
+    <DefaultLayout title={t('registerLeave')}>
+      <ScrollView style={AppStyles.f_1} showsVerticalScrollIndicator={false}>
+        <View style={[AppStyles.f_1, AppStyles.gap16]}>
+          <View style={[AppStyles.f_Row, AppStyles.gap12]}>
+           <TouchableOpacity style={AppStyles.f_1} onPress={handleOpenCalendar}>
               <AppInput
-                label="Từ ngày *"
-                placeholder="Chọn ngày"
+                label={`${t('fromDate')} *`}
+                placeholder={t('selectDate')}
                 editable={false}
                 value={selectedStartDate}
               />
            </TouchableOpacity>
-            <TouchableOpacity style={{ flex: 1 }} onPress={handleOpenCalendarEndDate}>
+            <TouchableOpacity style={AppStyles.f_1} onPress={handleOpenCalendarEndDate}>
               <AppInput
-                label="Đến ngày *"
-                placeholder="Chọn ngày"
+                label={`${t('toDate')} *`}
+                placeholder={t('selectDate')}
                 editable={false}
                 value={selectedEndDate}
               />
             </TouchableOpacity>
           </View>
 
-          <View style={styles.radioGroup}>
+          <View style={[AppStyles.gap8]}>
             <View
-              style={[styles.radioItem, AppStyles.f_Row, AppStyles.a_center]}
+              style={[AppStyles.gap8, AppStyles.f_Row, AppStyles.a_center]}
             >
               <SvgRadioButton color={Colors.primary} />
-              <AppText variant="body" fontType="medium">
-                Áp dụng cùng loại công
+              <AppText  fontType="medium">
+                {t('applySameType')}
               </AppText>
             </View>
             <View
-              style={[styles.radioItem, AppStyles.f_Row, AppStyles.a_center]}
+              style={[AppStyles.gap8, AppStyles.f_Row, AppStyles.a_center]}
             >
               <SvgRadioButton color={Colors.primary} />
-              <AppText variant="body" fontType="medium">
-                Khai báo theo ngày
+              <AppText fontType="medium">
+                {t('declareByDay')}
               </AppText>
             </View>
             <View
-              style={[styles.radioItem, AppStyles.f_Row, AppStyles.a_center]}
+              style={[AppStyles.gap8, AppStyles.f_Row, AppStyles.a_center]}
             >
               <SvgRadioButton color={Colors.primary} />
-              <AppText variant="body" fontType="medium">
-                Vắng mặt việc riêng theo giờ
+              <AppText  fontType="medium">
+                {t('declareByHour')}
               </AppText>
             </View>
           </View>
 
-          <View style={styles.section}>
-            <AppText variant="body" fontType="medium">
-              Lý do
-              <AppText variant="body" color={Colors.error}>
+          <View style={[AppStyles.gap8]}>
+            <AppText  fontType="medium">
+              {t('reason')}
+              <AppText  color={Colors.error}>
                 *
               </AppText>
             </AppText>
             <AppInput
-              placeholder="Vui lòng nhập lý do"
+              placeholder={t('reasonPlaceholder')}
               multiline
               numberOfLines={4}
             />
           </View>
 
-          <AppButton label="Gửi duyệt" />
+          <AppButton label={t('sendApprove')} />
 
-          <View style={styles.summary}>
-            <SummaryRow label="Ngày phép khả dụng" value="5" />
-            <SummaryRow label="Ngày phép đã nghỉ" value="1" />
-            <SummaryRow label="Ngày phép còn lại" value="3" />
+          <View style={[AppStyles.gap8, AppStyles.marginTop12]}>
+            <SummaryRow label={t('availableLeave')} value="5" />
+            <SummaryRow label={t('usedLeave')} value="1" />
+            <SummaryRow label={t('remainingLeave')} value="3" />
           </View>
         </View>
       </ScrollView>
@@ -109,35 +109,3 @@ export const RegisterLeaveScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    gap: Spacing.lg,
-  },
-
-  row: {
-    flexDirection: 'row',
-    gap: Spacing.md,
-  },
-
-  flex: {
-    flex: 1,
-    gap: Spacing.xs,
-  },
-
-  radioGroup: {
-    gap: Spacing.sm,
-  },
-  radioItem: {
-    gap: Spacing.xs,
-  },
-
-  section: {
-    gap: Spacing.xs,
-  },
-
-  summary: {
-    gap: Spacing.sm,
-    marginTop: Spacing.md,
-  },
-});
