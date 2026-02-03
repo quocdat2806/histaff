@@ -1,22 +1,22 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
-import { z } from 'zod';
-import { toFormikValidationSchema } from 'zod-formik-adapter';
+import type { AnyObjectSchema } from 'yup';
 import { AppText } from '../ui';
 import { Colors } from '@/constants/colors';
-interface FormWrapperProps<T extends z.ZodType<any, any>> {
-  schema: T;
-  initialValues: z.infer<T>;
-  onSubmit: (values: z.infer<T>, helpers: FormikHelpers<z.infer<T>>) => void | Promise<void>;
-  children: (formikProps: FormikProps<z.infer<T>>) => React.ReactNode;
+
+interface FormWrapperProps<TValues extends Record<string, any>> {
+  schema: AnyObjectSchema;
+  initialValues: TValues;
+  onSubmit: (values: TValues, helpers: FormikHelpers<TValues>) => void | Promise<void>;
+  children: (formikProps: FormikProps<TValues>) => React.ReactNode;
   validateOnChange?: boolean;
   validateOnBlur?: boolean;
   validateOnMount?: boolean;
   enableReinitialize?: boolean;
 }
 
-export const FormWrapper = <T extends z.ZodType<any, any>>({
+export const FormWrapper = <TValues extends Record<string, any>>({
   schema,
   initialValues,
   onSubmit,
@@ -25,11 +25,11 @@ export const FormWrapper = <T extends z.ZodType<any, any>>({
   validateOnBlur = true,
   validateOnMount = false,
   enableReinitialize = false,
-}: FormWrapperProps<T>) => {
+}: FormWrapperProps<TValues>) => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={toFormikValidationSchema(schema)}
+      validationSchema={schema}
       onSubmit={onSubmit}
       validateOnChange={validateOnChange}
       validateOnBlur={validateOnBlur}

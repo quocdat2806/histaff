@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { StatusBar, useColorScheme } from 'react-native';
+import { KeyboardProvider } from "react-native-keyboard-controller";
+
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppNavigator, navigationRef } from '@/navigation';
@@ -21,7 +23,9 @@ function App() {
         <AlertProvider>
           <CalendarPickerProvider>
             <NavigationContainer ref={navigationRef}>
+            <KeyboardProvider preload={false}>
               <AppNavigator />
+              </KeyboardProvider>
             </NavigationContainer>
           </CalendarPickerProvider>
         </AlertProvider>

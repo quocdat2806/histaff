@@ -14,7 +14,7 @@ export const ActionListItem: React.FC<ActionListItemConfig> = ({
   icon,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={AppStyles.backGroundWhite}>
+    <TouchableOpacity onPress={onPress} style={[AppStyles.backGroundWhite, AppStyles.borderRadius8, AppStyles.marginBottom12]}>
       <View
         style={[
           AppStyles.f_Row,
@@ -22,7 +22,6 @@ export const ActionListItem: React.FC<ActionListItemConfig> = ({
           AppStyles.a_center,
           AppStyles.gap12,
           AppStyles.padding16,
-          AppStyles.borderRadius12,
         ]}
       >
         {icon}

@@ -26,7 +26,13 @@ import { Subtitle } from '@/components/ui/Text';
 
 import { useTranslation } from '@/hooks/useTranslation';
 
+import { getDeviceId } from '@/helper';
+import authService from '@/api/Auth';
+
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'>;
+
+const FCM_TOKEN =
+  'euJsI0s1SWOWzxzxKdv4QP:APA91bHHQqammiAQiFwk3IUDZSWhk2rwI7nCXXSDOKJIZQ-lPGb6aRdoVzYkOvw2idtKaSRkK4TkwXdk0O9NX2sTqD5NS3uA-41Q2aWGkvg050TvHw4q-Ik';
 
 export const LoginScreen = (_props: Props) => {
   const login = useAuthStore(state => state.login);
@@ -40,12 +46,19 @@ export const LoginScreen = (_props: Props) => {
   const { showAlert, hideAlert } = useAlert();
 
   const handleLogin = async () => {
-    login(
-      { id: '1', name: 'Test User', token: 'vlxxxxxx', isAvatar: false },
-      'vlxxxxxx',
-    );
-
+    setLoading(true);
     try {
+      const deviceId = await getDeviceId();
+      const response = await authService.login({
+        username: account,
+        password: password,
+        deviceId: deviceId,
+        appType: 'MOBILE',
+        fcmToken: FCM_TOKEN,
+      });
+      if (response.innerBody.token) {
+        login(response.innerBody);
+      }
     } catch (err: any) {
       const error = err as ApiError;
       const errorMessage = error?.message;
@@ -61,13 +74,16 @@ export const LoginScreen = (_props: Props) => {
 
   return (
     <ImageBackground source={ImageAssets.backgroundLogin} style={AppStyles.f_1}>
-      <View style={[AppStyles.f_1, AppStyles.j_center, 
+      <View
+        style={[
+          AppStyles.f_1,
+          AppStyles.j_center,
 
-        AppStyles.paddingHorizontal16,
-      ]}>
-        <View style={[AppStyles.marginBottom16,AppStyles.gap8]}>
+          AppStyles.paddingHorizontal16,
+        ]}
+      >
+        <View style={[AppStyles.marginBottom16, AppStyles.gap16]}>
           <AppInput
-            variant="outlined"
             placeholder={Texts.inputAccount}
             onChangeText={setAccount}
             value={account}
@@ -75,7 +91,6 @@ export const LoginScreen = (_props: Props) => {
           <AppInput
             secureTextEntry
             showPasswordToggle
-            variant="outlined"
             placeholder={Texts.inputPassword}
             onChangeText={setPassword}
             value={password}

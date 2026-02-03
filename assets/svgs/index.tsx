@@ -352,7 +352,7 @@ function SvgActionHistory(props: SvgProps) {
   );
 }
 
-function SvgRadioButton(props: SvgProps) {
+function SvgRadioButtonChecked(props: SvgProps) {
   const { color = 'white' } = props;
 
   return (
@@ -370,6 +370,30 @@ function SvgRadioButton(props: SvgProps) {
     </Svg>
   );
 }
+function SvgRadioNotChecked (){
+  return (
+    <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+<Rect
+  x="0.5"
+  y="0.5"
+  width="19"
+  height="19"
+  rx="9.5"
+  fill="white"
+/>
+<Rect
+  x="0.5"
+  y="0.5"
+  width="19"
+  height="19"
+  rx="9.5"
+  stroke="#D0D5DD"
+/>
+</Svg>
+  )
+}
+
+
 
 export {
   SvgHidePass,
@@ -399,7 +423,8 @@ export {
   SvgActionOT,
   SvgActionExplanation,
   SvgActionHistory,
-  SvgRadioButton,
+  SvgRadioButtonChecked, 
+  SvgRadioNotChecked,
   CheckIcon,
   WarningIcon,
   InfoIcon,

@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { BorderRadius, FontSize, Spacing, Width } from '@/constants/dimens';
 import { Colors } from '@/constants/colors';
+import { scale } from 'react-native-size-matters';
 
 const AppStyles = StyleSheet.create({
   f_1: {
@@ -412,13 +413,13 @@ const AppStyles = StyleSheet.create({
     color: Colors.black,
   },
   inputHeight36: {
-    height: 36,
+    height: scale(36),
   },
   inputHeight44: {
-    height: 44,
+    height: scale(44),
   },
   inputHeight52: {
-    height: 52,
+    height: scale(52),
   },
 });
 

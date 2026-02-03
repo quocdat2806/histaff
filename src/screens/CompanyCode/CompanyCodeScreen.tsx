@@ -30,11 +30,14 @@ export const CompanyCodeScreen = () => {
     setLoading(true);
 
     try {
-      navigate(ROUTERS.Auth, { screen: ROUTERS.Login });
-      // const response = await authService.login({
-      //   companyCode: companyCode,
-      // });
+      const response = await authService.checkCompanyCode({
+        customerCode: companyCode,
+      }); 
+      if(response.screen.length > 0){
+        navigate(ROUTERS.Auth,{screen:ROUTERS.Login})
+      }
     } catch (err) {
+       
       const apiError = err as ApiError;
       const errorMessage = apiError?.message;
       showAlert({
@@ -67,7 +70,6 @@ export const CompanyCodeScreen = () => {
           <AppInput
             labelColor={Colors.white}
             label={Texts.companyCode}
-            variant="outlined"
             placeholder={Texts.inputCompanyCodePlaceholder}
             onChangeText={setCompanyCode}
             value={companyCode}

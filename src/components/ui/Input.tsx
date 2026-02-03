@@ -5,15 +5,17 @@ import {
   View,
   TouchableOpacity,
   ViewStyle,
-  TextStyle,
 } from 'react-native';
+import { scale } from 'react-native-size-matters';
 import { AppText } from './Text';
-import { FontSize, } from '@/constants/dimens';
+import { BorderRadius, FontSize } from '@/constants/dimens';
 import { Colors } from '@/constants/colors';
 import AppStyles from '@/style';
-type InputVariant = 'outlined' | 'filled';
-type InputSize = 'sm' | 'md' | 'lg';
 import { SvgShowPass, SvgHidePass } from '@assets/svgs';
+
+const INPUT_HEIGHT_MD = scale(44);
+const INPUT_LINE_HEIGHT = scale(20);
+const INPUT_PADDING_VERTICAL_MD = scale(24);
 export interface AppInputProps extends TextInputProps {
   label?: string;
   placeholder?: string;
@@ -22,8 +24,6 @@ export interface AppInputProps extends TextInputProps {
 
   error?: string;
   isError?: boolean;
-  success?: boolean;
-  helperText?: string;
   required?: boolean;
 
   leftIcon?: React.ReactNode;
@@ -34,9 +34,7 @@ export interface AppInputProps extends TextInputProps {
 
   clearable?: boolean;
   onClear?: () => void;
-  showCounter?: boolean;
-  variant?: InputVariant;
-  size?: InputSize;
+  maxLength?: number;
   disabled?: boolean;
   loading?: boolean;
 
@@ -55,8 +53,6 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
 
       error,
       isError = false,
-      success = false,
-      helperText,
       required = false,
 
       leftIcon,
@@ -68,11 +64,7 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
 
       clearable = false,
       onClear,
-      showCounter = false,
       maxLength,
-
-      variant = 'outlined',
-      size = 'md',
       disabled = false,
       loading = false,
       labelColor = Colors.black,
@@ -80,29 +72,13 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
       containerStyle,
       inputContainerStyle,
       style,
-
-      onFocus,
-      onBlur,
-
       ...rest
     },
     ref,
   ) => {
-    const [isFocused, setIsFocused] = useState(false);
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-    const hasError = isError || !!error;
     const isDisabled = disabled || loading;
-
-    const handleFocus = (e: any) => {
-      setIsFocused(true);
-      onFocus?.(e);
-    };
-
-    const handleBlur = (e: any) => {
-      setIsFocused(false);
-      onBlur?.(e);
-    };
 
     const handleClear = () => {
       onChangeText?.('');
@@ -112,57 +88,50 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
     const togglePasswordVisibility = () => {
       setIsPasswordVisible(!isPasswordVisible);
     };
+    const multiline = rest.multiline ?? false;
+    const numberOfLines = rest.numberOfLines;
+    const isMultilineWithLines = multiline && typeof numberOfLines === 'number' && numberOfLines > 0;
+
     const getContainerStyle = (): ViewStyle => {
-      const baseStyle =
-        variant === 'outlined'
-          ? {
-              ...AppStyles.borderDefault,
-              ...AppStyles.border1,
-             ...AppStyles.borderRadius12,
-             ...AppStyles.backGroundWhite,
-              ...AppStyles.f_Row,
-              ...AppStyles.a_center,
-            }
-          : {
-              ...AppStyles.border0,
-              ...AppStyles.borderRadius12,
-              ...AppStyles.backGroundInput,
-              ...AppStyles.f_Row,
-              ...AppStyles.a_center,
-            };
-
-      const sizeStyle = sizeStyles[size];
-
-      let stateStyle: ViewStyle = {};
-
-      if (hasError) {
-        stateStyle = { ...AppStyles.borderError, ...AppStyles.border1 };
-      } else if (success) {
-        stateStyle = { ...AppStyles.borderSuccess, ...AppStyles.border1 };
-      } else if (isFocused) {
-        stateStyle = { ...AppStyles.borderDefault, ...AppStyles.border2 };
-      }
+      const base: ViewStyle = {
+        ...AppStyles.border1,
+        ...AppStyles.borderDefault,
+        ...AppStyles.borderRadius12,
+        ...AppStyles.backGroundWhite,
+        ...AppStyles.paddingHorizontal16,
+        ...AppStyles.paddingVertical12,
+        ...AppStyles.f_Row,
+        ...AppStyles.a_center,
+      };
 
       if (isDisabled) {
-        stateStyle = { ...stateStyle, ...AppStyles.backGroundDisabled, ...AppStyles.opacity06 };
+        base.backgroundColor = Colors.disabled;
+        base.opacity = 0.6;
       }
 
-      return { ...baseStyle, ...sizeStyle, ...stateStyle };
+      if (isMultilineWithLines) {
+        base.alignItems = 'flex-start';
+        base.minHeight =
+          INPUT_LINE_HEIGHT * numberOfLines! + INPUT_PADDING_VERTICAL_MD;
+      } else {
+        base.height = INPUT_HEIGHT_MD;
+      }
+
+      return base;
     };
 
     const showClearButton = clearable && value.length > 0 && !isDisabled;
 
     const showPasswordButton = showPasswordToggle && secureTextEntry;
 
-    const characterCount = maxLength ? `${value.length}/${maxLength}` : null;
 
     return (
       <View style={[ containerStyle]}>
         {label && (
-          <View style={[AppStyles.marginBottom8]}>
-            <AppText color={labelColor} variant="body" fontType="medium">
+          <View style={AppStyles.marginBottom4}>
+            <AppText color={labelColor}  fontType="medium">
               {label}
-              {required && <AppText color="error"> *</AppText>}
+              {required && <AppText color={Colors.error}> *</AppText>}
             </AppText>
           </View>
         )}
@@ -189,18 +158,18 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
             placeholderTextColor={Colors.placeholder}
             editable={!isDisabled}
             secureTextEntry={secureTextEntry && !isPasswordVisible}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
             maxLength={maxLength}
+            multiline={multiline}
+            numberOfLines={numberOfLines}
             style={[
               AppStyles.defaultInputStyle,
               AppStyles.padding0,
               AppStyles.f_1,
-              inputSizeStyles[size],
               leftIcon ? AppStyles.marginLeft8 : undefined,
               showClearButton || showPasswordButton || rightIcon
                 ? AppStyles.marginRight8
                 : undefined,
+              isMultilineWithLines && { paddingVertical: scale(12), textAlignVertical: 'top' },
               style,
             ]}
             {...rest}
@@ -255,7 +224,7 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
           </View>
         </View>
 
-        {(helperText || error || showCounter) && (
+        {error && (
           <View
             style={[
               AppStyles.marginTop8,
@@ -270,52 +239,10 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
                   {error}
                 </AppText>
               )}
-              {!error && helperText && (
-                <AppText variant="caption" color="secondary">
-                  {helperText}
-                </AppText>
-              )}
             </View>
-
-            {showCounter && characterCount && (
-              <AppText variant="caption" color="secondary">
-                {characterCount}
-              </AppText>
-            )}
           </View>
         )}
       </View>
     );
   },
 );
-
-
-const sizeStyles: Record<InputSize, ViewStyle> = {
-  sm: {
-    ...AppStyles.paddingHorizontal12,
-    ...AppStyles.paddingVertical10,
-    ...AppStyles.inputHeight36,
-  },
-  md: {
-    ...AppStyles.paddingHorizontal16,
-    ...AppStyles.paddingVertical12,
-    ...AppStyles.inputHeight44,
-  },
-  lg: {
-    ...AppStyles.paddingHorizontal20,
-    ...AppStyles.paddingVertical16,
-    ...AppStyles.inputHeight52,
-  },
-};
-
-const inputSizeStyles: Record<InputSize, TextStyle> = {
-  sm: {
-    fontSize: FontSize.caption,
-  },
-  md: {
-    fontSize: FontSize.body,
-  },
-  lg: {
-    fontSize: FontSize.subtitle,
-  },
-};

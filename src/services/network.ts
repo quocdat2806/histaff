@@ -9,6 +9,10 @@ import * as Keychain from 'react-native-keychain';
 
 const DEV_FALLBACK_TOKEN = 'vlxxxxxx';
 
+const API_BASE_URL = 'https://pvndev.histaff.vn';
+const API_LOGIN_URL = 'https://pvndev.histaff.vn';
+
+const CHECK_COMPANY_CODE_URL = 'https://mobileapi.histaff.online/MobileGateway';
 interface ApiConfig {
   baseURL: string;
   timeout?: number;
@@ -53,6 +57,7 @@ class ApiService {
           method: config.method?.toUpperCase(),
           url: config.url,
           data: config.data,
+          baseURL: config.baseURL,
         });
 
         return config;
@@ -150,66 +155,67 @@ class ApiService {
 
   async get<T = any>(
     url: string,
-    config?: AxiosRequestConfig
-  ): Promise<BaseResponse<T>> {
+    config?: AxiosRequestConfig,
+  ): Promise<T> {
+    console.log(config);
     const response = await this.axiosInstance.get<BaseResponse<T>>(url, config);
-    return response.data;
+    return response.data.data;
   }
 
   async post<T = any>(
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<BaseResponse<T>> {
+  ): Promise<T> {
     const response = await this.axiosInstance.post<BaseResponse<T>>(url, data, config);
-    return response.data;
+    return response.data.data;
   }
 
   async put<T = any>(
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<BaseResponse<T>> {
+  ): Promise<T> {
     const response = await this.axiosInstance.put<BaseResponse<T>>(url, data, config);
-    return response.data;
+    return response.data.data;
   }
 
   async patch<T = any>(
     url: string,
     data?: any,
     config?: AxiosRequestConfig
-  ): Promise<BaseResponse<T>> {
+  ): Promise<T> {
     const response = await this.axiosInstance.patch<BaseResponse<T>>(url, data, config);
-    return response.data;
+    return response.data.data;
   }
 
   async delete<T = any>(
     url: string,
     config?: AxiosRequestConfig
-  ): Promise<BaseResponse<T>> {
+  ): Promise<T> {
     const response = await this.axiosInstance.delete<BaseResponse<T>>(url, config);
-    return response.data;
+    return response.data.data;
   }
 
   async uploadFile<T = any>(
     url: string,
     formData: FormData,
     onUploadProgress?: (progressEvent: any) => void
-  ): Promise<BaseResponse<T>> {
+  ): Promise<T> {
     const response = await this.axiosInstance.post<BaseResponse<T>>(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
       onUploadProgress,
     });
-    return response.data;
+    return response.data.data;
   }
 
   async postFormData<T = any>(
     url: string,
     data: FormData,
     config?: AxiosRequestConfig
-  ): Promise<BaseResponse<T>> {
+  ): Promise<T> {
     const response = await this.axiosInstance.post<BaseResponse<T>>(url, data, {
       ...config,
       headers: {
@@ -217,14 +223,14 @@ class ApiService {
         ...config?.headers,
       },
     });
-    return response.data;
+    return response.data.data;
   }
 
   async putFormData<T = any>(
     url: string,
     data: FormData,
     config?: AxiosRequestConfig
-  ): Promise<BaseResponse<T>> {
+  ): Promise<T> {
     const response = await this.axiosInstance.put<BaseResponse<T>>(url, data, {
       ...config,
       headers: {
@@ -232,7 +238,7 @@ class ApiService {
         ...config?.headers,
       },
     });
-    return response.data;
+    return response.data.data;
   }
 
   setHeader(key: string, value: string): void {
@@ -249,7 +255,18 @@ class ApiService {
 }
 
 export const apiService = new ApiService({
-  baseURL: 'http://192.168.60.100:5000',
+  baseURL: API_BASE_URL,
+  timeout: 30000,
+});
+
+export const apiLogin = new ApiService({
+  baseURL: API_LOGIN_URL,
+  timeout: 30000,
+});
+
+
+export const apiCheckCompanyCode = new ApiService({
+  baseURL: CHECK_COMPANY_CODE_URL,
   timeout: 30000,
 });
 
