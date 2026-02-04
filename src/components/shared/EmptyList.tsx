@@ -4,12 +4,14 @@ import { View } from 'react-native';
 import AppStyles from '@/style';
 import { AppText } from '@/components/ui';
 import { Colors } from '@/constants/colors';
+import { useTranslation } from '@/hooks/useTranslation';
 
-export const AppEmptyList: React.FC = ({}) => {
+export const AppEmptyList = () => {
+  const { t } = useTranslation();
   return (
     <View style={[AppStyles.f_1, AppStyles.j_center]}>
       <AppText color={Colors.secondaryGray} variant="h6" center>
-        Không có dữ liệu để hiển thị{' '}
+        {t('noData')}
       </AppText>
     </View>
   );

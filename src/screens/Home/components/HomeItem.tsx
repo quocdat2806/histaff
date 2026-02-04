@@ -83,23 +83,11 @@ interface Props {
 
 const HomeItem = ({ item }: Props) => {
   return (
-    <TouchableOpacity
-      style={[styles.container]}
-      onPress={item.onPress}
-    > 
-
-      <View
-        style={[
-          styles.iconWrapper,
-        ]}
-      >
+    <TouchableOpacity style={[styles.container]} onPress={item.onPress}>
+      <View style={[styles.iconWrapper]}>
         {item.icon}
         {!!item.badge && (
-          <View
-            style={[
-              styles.badge,
-            ]}
-          >
+          <View style={[styles.badge]}>
             <AppText variant="caption" color={Colors.white}>
               {item.badge}
             </AppText>
@@ -107,11 +95,7 @@ const HomeItem = ({ item }: Props) => {
         )}
       </View>
 
-      <AppText
-        variant="subtitle"
-        color={Colors.black}
-        numberOfLines={1}
-      >
+      <AppText variant="subtitle" color={Colors.black} numberOfLines={1}>
         {item.title}
       </AppText>
     </TouchableOpacity>
@@ -124,16 +108,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: Spacing.lg,
     width: Width.fullScreenDimensionWidth / 4,
-    gap:Spacing.xs,
-
+    gap: Spacing.xs,
   },
 
   iconWrapper: {
     backgroundColor: Colors.white,
     ...AppStyles.j_center,
     ...AppStyles.a_center,
-    width: Width.fullScreenDimensionWidth / 4 * 0.7,
-    height: Width.fullScreenDimensionWidth / 4 * 0.7,
+    width: (Width.fullScreenDimensionWidth / 4) * 0.7,
+    height: (Width.fullScreenDimensionWidth / 4) * 0.7,
     borderRadius: BorderRadius.xl,
   },
 
@@ -145,11 +128,8 @@ const styles = StyleSheet.create({
     ...AppStyles.j_center,
     ...AppStyles.a_center,
     paddingHorizontal: Spacing.xxs,
-    width: Width.fullScreenDimensionWidth / 4 * 0.25,
-    height: Width.fullScreenDimensionWidth / 4 * 0.25,
+    width: (Width.fullScreenDimensionWidth / 4) * 0.25,
+    height: (Width.fullScreenDimensionWidth / 4) * 0.25,
     borderRadius: BorderRadius.xl,
   },
-
-
 });
-

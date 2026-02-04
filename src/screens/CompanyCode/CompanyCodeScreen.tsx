@@ -32,12 +32,11 @@ export const CompanyCodeScreen = () => {
     try {
       const response = await authService.checkCompanyCode({
         customerCode: companyCode,
-      }); 
-      if(response.screen.length > 0){
-        navigate(ROUTERS.Auth,{screen:ROUTERS.Login})
+      });
+      if (response.screen.length > 0) {
+        navigate(ROUTERS.Auth, { screen: ROUTERS.Login });
       }
     } catch (err) {
-       
       const apiError = err as ApiError;
       const errorMessage = apiError?.message;
       showAlert({

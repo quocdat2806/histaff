@@ -19,21 +19,29 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   actions,
 }) => {
   return (
-    <View style={[AppStyles.f_Row, AppStyles.a_center, 
-    AppStyles.backGroundPrimary,
-    AppStyles.paddingHorizontal12,
-    AppStyles.paddingVertical8,
-    ]}>
+    <View
+      style={[
+        AppStyles.f_Row,
+        AppStyles.a_center,
+        AppStyles.backGroundPrimary,
+        AppStyles.paddingHorizontal12,
+        AppStyles.paddingVertical8,
+      ]}
+    >
       {isShowBackIcon ? (
         <TouchableOpacity onPress={goBack} hitSlop={8}>
           <BackIcon width={IconSize.md} height={IconSize.md} />
         </TouchableOpacity>
       ) : null}
-      <AppText variant="h3" fontType="bold" style={AppStyles.f_1} numberOfLines={1}>
+      <AppText
+        variant="h3"
+        fontType="bold"
+        style={AppStyles.f_1}
+        numberOfLines={1}
+      >
         {title}
       </AppText>
       {actions ? actions : null}
     </View>
   );
 };
-

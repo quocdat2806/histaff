@@ -65,7 +65,7 @@ class ApiService {
       (error: AxiosError) => {
         console.error('Request Error:', error);
         return Promise.reject(error);
-      }
+      },
     );
 
     this.axiosInstance.interceptors.response.use(
@@ -100,8 +100,7 @@ class ApiService {
           message = 'Không thể kết nối đến máy chủ.';
         }
         return Promise.reject({ message } as ApiError);
-
-      }
+      },
     );
   }
 
@@ -153,10 +152,7 @@ class ApiService {
     await this.handleLogout();
   }
 
-  async get<T = any>(
-    url: string,
-    config?: AxiosRequestConfig,
-  ): Promise<T> {
+  async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
     console.log(config);
     const response = await this.axiosInstance.get<BaseResponse<T>>(url, config);
     return response.data.data;
@@ -165,56 +161,72 @@ class ApiService {
   async post<T = any>(
     url: string,
     data?: any,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
-    const response = await this.axiosInstance.post<BaseResponse<T>>(url, data, config);
+    const response = await this.axiosInstance.post<BaseResponse<T>>(
+      url,
+      data,
+      config,
+    );
     return response.data.data;
   }
 
   async put<T = any>(
     url: string,
     data?: any,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
-    const response = await this.axiosInstance.put<BaseResponse<T>>(url, data, config);
+    const response = await this.axiosInstance.put<BaseResponse<T>>(
+      url,
+      data,
+      config,
+    );
     return response.data.data;
   }
 
   async patch<T = any>(
     url: string,
     data?: any,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
-    const response = await this.axiosInstance.patch<BaseResponse<T>>(url, data, config);
+    const response = await this.axiosInstance.patch<BaseResponse<T>>(
+      url,
+      data,
+      config,
+    );
     return response.data.data;
   }
 
-  async delete<T = any>(
-    url: string,
-    config?: AxiosRequestConfig
-  ): Promise<T> {
-    const response = await this.axiosInstance.delete<BaseResponse<T>>(url, config);
+  async delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.axiosInstance.delete<BaseResponse<T>>(
+      url,
+      config,
+    );
     return response.data.data;
   }
 
   async uploadFile<T = any>(
     url: string,
     formData: FormData,
-    onUploadProgress?: (progressEvent: any) => void
+    onUploadProgress?: (progressEvent: any) => void,
   ): Promise<T> {
-    const response = await this.axiosInstance.post<BaseResponse<T>>(url, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
+    const response = await this.axiosInstance.post<BaseResponse<T>>(
+      url,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress,
       },
-      onUploadProgress,
-    });
+    );
     return response.data.data;
   }
 
   async postFormData<T = any>(
     url: string,
     data: FormData,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
     const response = await this.axiosInstance.post<BaseResponse<T>>(url, data, {
       ...config,
@@ -229,7 +241,7 @@ class ApiService {
   async putFormData<T = any>(
     url: string,
     data: FormData,
-    config?: AxiosRequestConfig
+    config?: AxiosRequestConfig,
   ): Promise<T> {
     const response = await this.axiosInstance.put<BaseResponse<T>>(url, data, {
       ...config,
@@ -264,11 +276,9 @@ export const apiLogin = new ApiService({
   timeout: 30000,
 });
 
-
 export const apiCheckCompanyCode = new ApiService({
   baseURL: CHECK_COMPANY_CODE_URL,
   timeout: 30000,
 });
-
 
 export default apiService;

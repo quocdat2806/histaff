@@ -7,7 +7,7 @@
       "@assets": ["assets"],
       "@assets/*": ["assets/*"]
     },
-    "types": ["jest"],
+    "types": ["jest"]
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["**/node_modules", "**/Pods"]

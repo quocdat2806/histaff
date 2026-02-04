@@ -1,0 +1,14 @@
+node_modules
+android
+ios
+coverage
+*.lock
+.dist
+build
+vendor
+.cursor
+.vscode
+.idea
+.git
+.gitignore
+.gitignore

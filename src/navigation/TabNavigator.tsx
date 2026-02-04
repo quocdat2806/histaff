@@ -10,12 +10,59 @@ import { CheckInScreen } from '@/screens';
 import { ProfileScreen } from '@/screens';
 import { NotificationScreen } from '@/screens';
 
-
 import { useTranslation } from '@/hooks/useTranslation';
 import { SvgGPS, SvgHome, SvgNotification, SvgPhoneBook } from '@assets/svgs';
 
 import { Colors } from '@/constants/colors';
+
 const Tab = createBottomTabNavigator<MainTabParamList>();
+
+const tabIconColor = (focused: boolean) =>
+  focused ? Colors.primary : Colors.placeholder;
+
+function TabIconHome({ focused }: { focused: boolean }) {
+  return (
+    <SvgHome
+      color={tabIconColor(focused)}
+      fill={tabIconColor(focused)}
+      stroke={tabIconColor(focused)}
+    />
+  );
+}
+
+function TabIconContact({ focused }: { focused: boolean }) {
+  return (
+    <SvgPhoneBook
+      color={tabIconColor(focused)}
+      fill={tabIconColor(focused)}
+      stroke={tabIconColor(focused)}
+    />
+  );
+}
+
+function TabIconCheckIn() {
+  return <SvgGPS />;
+}
+
+function TabIconNotification({ focused }: { focused: boolean }) {
+  return (
+    <SvgNotification
+      color={tabIconColor(focused)}
+      fill={tabIconColor(focused)}
+      stroke={tabIconColor(focused)}
+    />
+  );
+}
+
+function TabIconProfile({ focused }: { focused: boolean }) {
+  return (
+    <SvgNotification
+      color={tabIconColor(focused)}
+      fill={tabIconColor(focused)}
+      stroke={tabIconColor(focused)}
+    />
+  );
+}
 
 export const TabNavigator = () => {
   const { t } = useTranslation();
@@ -26,7 +73,7 @@ export const TabNavigator = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarIconStyle: {
-          height:'100%',
+          height: '100%',
         },
       }}
     >
@@ -35,13 +82,7 @@ export const TabNavigator = () => {
         component={HomeScreen}
         options={{
           tabBarAccessibilityLabel: t('home'),
-         tabBarIcon: ({ focused }) => (
-            <SvgHome
-              color={focused ? Colors.primary : Colors.placeholder}
-              fill={focused ? Colors.primary : Colors.placeholder}
-              stroke={focused ? Colors.primary : Colors.placeholder}
-            />
-          ),
+          tabBarIcon: TabIconHome,
         }}
       />
       <Tab.Screen
@@ -49,13 +90,7 @@ export const TabNavigator = () => {
         component={ContactScreen}
         options={{
           tabBarAccessibilityLabel: t('contact'),
-       tabBarIcon: ({ focused }) => (
-            <SvgPhoneBook
-              color={focused ? Colors.primary : Colors.placeholder}
-              fill={focused ? Colors.primary : Colors.placeholder}
-              stroke={focused ? Colors.primary : Colors.placeholder}
-            />
-          ),
+          tabBarIcon: TabIconContact,
         }}
       />
       <Tab.Screen
@@ -63,13 +98,7 @@ export const TabNavigator = () => {
         component={CheckInScreen}
         options={{
           tabBarAccessibilityLabel: t('checkIn'),
-          tabBarIcon: ({ focused }) => (
-            <SvgGPS
-              color={focused ? Colors.primary : Colors.placeholder}
-              fill={focused ? Colors.primary : Colors.placeholder}
-              stroke={focused ? Colors.primary : Colors.placeholder}
-            />
-          ),
+          tabBarIcon: TabIconCheckIn,
         }}
       />
       <Tab.Screen
@@ -77,13 +106,7 @@ export const TabNavigator = () => {
         component={NotificationScreen}
         options={{
           tabBarAccessibilityLabel: t('notification'),
-               tabBarIcon: ({ focused }) => (
-            <SvgNotification
-              color={focused ? Colors.primary : Colors.placeholder}
-              fill={focused ? Colors.primary : Colors.placeholder}
-              stroke={focused ? Colors.primary : Colors.placeholder}
-            />
-          ),
+          tabBarIcon: TabIconNotification,
         }}
       />
       <Tab.Screen
@@ -91,12 +114,7 @@ export const TabNavigator = () => {
         component={ProfileScreen}
         options={{
           tabBarAccessibilityLabel: t('profile'),
-            tabBarIcon: ({ focused }) => (
-            <SvgNotification
-              color={focused ? Colors.primary : Colors.placeholder}
-              fill={focused ? Colors.primary : Colors.placeholder}
-              stroke={focused ? Colors.primary : Colors.placeholder}
-            />)
+          tabBarIcon: TabIconProfile,
         }}
       />
     </Tab.Navigator>

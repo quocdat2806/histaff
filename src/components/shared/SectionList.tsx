@@ -14,7 +14,7 @@ export function AppSectionList<ItemT, SectionT>({
   return (
     <SectionList<ItemT, SectionT>
       sections={sections}
-      contentContainerStyle={[AppStyles.f_1, AppStyles.paddingVertical12]}
+      contentContainerStyle={[AppStyles.f_1, AppStyles.paddingVertical8]}
       ListEmptyComponent={<AppEmptyList />}
       showsVerticalScrollIndicator={false}
       {...rest}

@@ -56,5 +56,4 @@ export const Width = {
   fullHeight: '100%',
   fullScreenDimensionWidth: Dimensions.get('window').width,
   fullScreenDimensionHeight: Dimensions.get('window').height,
-
 };

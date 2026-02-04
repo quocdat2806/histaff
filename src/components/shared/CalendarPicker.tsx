@@ -82,14 +82,14 @@ export function CalendarPickerModal({
                 />
                 <View style={[AppStyles.f_Row, AppStyles.j_end]}>
                   <AppButton
-                    style={{ backgroundColor: 'transparent' }}
+                    style={AppStyles.backGroundTransparent}
                     textStyle={{ color: Colors.black }}
                     label={Texts.cancel}
                     onPress={onClose}
                   />
                   <AppButton
                     textStyle={{ color: Colors.primary }}
-                    style={{ backgroundColor: 'transparent' }}
+                    style={AppStyles.backGroundTransparent}
                     label={Texts.select}
                     onPress={() => {}}
                   />

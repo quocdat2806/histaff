@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { scale } from 'react-native-size-matters';
 import { AppText } from './Text';
-import { BorderRadius, FontSize } from '@/constants/dimens';
 import { Colors } from '@/constants/colors';
 import AppStyles from '@/style';
 import { SvgShowPass, SvgHidePass } from '@assets/svgs';
@@ -23,7 +22,7 @@ export interface AppInputProps extends TextInputProps {
   onChangeText?: (text: string) => void;
 
   error?: string;
-  isError?: boolean;
+  
   required?: boolean;
 
   leftIcon?: React.ReactNode;
@@ -52,7 +51,6 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
       onChangeText,
 
       error,
-      isError = false,
       required = false,
 
       leftIcon,
@@ -90,7 +88,8 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
     };
     const multiline = rest.multiline ?? false;
     const numberOfLines = rest.numberOfLines;
-    const isMultilineWithLines = multiline && typeof numberOfLines === 'number' && numberOfLines > 0;
+    const isMultilineWithLines =
+      multiline && typeof numberOfLines === 'number' && numberOfLines > 0;
 
     const getContainerStyle = (): ViewStyle => {
       const base: ViewStyle = {
@@ -98,7 +97,7 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
         ...AppStyles.borderDefault,
         ...AppStyles.borderRadius12,
         ...AppStyles.backGroundWhite,
-        ...AppStyles.paddingHorizontal16,
+        ...AppStyles.paddingHorizontal12,
         ...AppStyles.paddingVertical12,
         ...AppStyles.f_Row,
         ...AppStyles.a_center,
@@ -124,12 +123,11 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
 
     const showPasswordButton = showPasswordToggle && secureTextEntry;
 
-
     return (
-      <View style={[ containerStyle]}>
+      <View style={[containerStyle]}>
         {label && (
           <View style={AppStyles.marginBottom4}>
-            <AppText color={labelColor}  fontType="medium">
+            <AppText color={labelColor} fontType="medium">
               {label}
               {required && <AppText color={Colors.error}> *</AppText>}
             </AppText>
@@ -169,26 +167,16 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
               showClearButton || showPasswordButton || rightIcon
                 ? AppStyles.marginRight8
                 : undefined,
-              isMultilineWithLines && { paddingVertical: scale(12), textAlignVertical: 'top' },
               style,
             ]}
             {...rest}
           />
 
-          <View
-            style={[
-              AppStyles.marginRight12,
-              AppStyles.a_center,
-              AppStyles.j_center,
-            ]}
-          >
+          <View style={[AppStyles.a_center, AppStyles.j_center]}>
             {showClearButton && (
               <TouchableOpacity
                 onPress={handleClear}
-                style={[
-                  AppStyles.a_center,
-                  AppStyles.j_center,
-                ]}
+                style={[AppStyles.a_center, AppStyles.j_center]}
                 hitSlop={10}
               >
                 <AppText>✕</AppText>
@@ -198,10 +186,7 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
             {showPasswordButton && (
               <TouchableOpacity
                 onPress={togglePasswordVisibility}
-                style={[
-                  AppStyles.a_center,
-                  AppStyles.j_center,
-                ]}
+                style={[AppStyles.a_center, AppStyles.j_center]}
                 hitSlop={10}
               >
                 {isPasswordVisible ? <SvgShowPass /> : <SvgHidePass />}
@@ -211,10 +196,7 @@ export const AppInput = forwardRef<TextInput, AppInputProps>(
             {rightIcon && (
               <TouchableOpacity
                 onPress={onRightIconPress}
-                style={[
-                  AppStyles.a_center,
-                  AppStyles.j_center,
-                ]}
+                style={[AppStyles.a_center, AppStyles.j_center]}
                 disabled={!onRightIconPress}
                 hitSlop={10}
               >

@@ -15,7 +15,7 @@ export const Colors = {
   border: '#D1D5DB',
   placeholder: '#999999',
   disabled: '#E0E0E0',
-  primary:'#0E96EB',
+  primary: '#0E96EB',
   skeleton: '#E0E0E0',
   backgroundImageError: '#F5F5F5',
   mutedImageError: '#CCCCCC',

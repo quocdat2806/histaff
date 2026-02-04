@@ -120,7 +120,6 @@ export const LoginScreen = (_props: Props) => {
 };
 
 const styles = StyleSheet.create({
-
   textFooter: {
     position: 'absolute',
     left: 0,

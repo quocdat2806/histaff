@@ -11,8 +11,6 @@ export interface AppGridProps<ItemT> extends FlatListProps<ItemT> {
 export function AppGrid<ItemT>({
   data,
   numColumns = 2,
-  contentContainerStyle,
-  columnWrapperStyle,
   keyExtractor,
   ...rest
 }: AppGridProps<ItemT>) {
