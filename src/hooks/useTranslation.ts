@@ -20,18 +20,12 @@ export const useTranslation = (): UseTranslationResult => {
   const language = useSettingsStore(state => state.language);
   const setLanguage = useSettingsStore(state => state.setLanguage);
 
-  const dictionary = useMemo(
-    () => getTexts(language),
-    [language],
-  );
+  const dictionary = useMemo(() => getTexts(language), [language]);
 
-  const fallbackDictionary = useMemo(
-    () => getTexts(defaultLanguage),
-    [],
-  );
+  const fallbackDictionary = useMemo(() => getTexts(defaultLanguage), []);
 
   const t = useCallback(
-    (key: TranslationKey) =>
+    (key: TranslationKey): string =>
       dictionary[key] ?? fallbackDictionary[key] ?? key,
     [dictionary, fallbackDictionary],
   );

@@ -12,9 +12,7 @@ export const DefaultLayout = ({ children, title }: DefaultLayoutProps) => {
   return (
     <SafeAreaContainer>
       <AppHeader title={title} />
-      <View style={[AppStyles.padding12,AppStyles.f_1]}>{children}</View>
+      <View style={[AppStyles.padding12, AppStyles.f_1]}>{children}</View>
     </SafeAreaContainer>
   );
 };
-
-

@@ -42,6 +42,7 @@ const translationVi = {
   registerExplanation: 'Đăng ký giải trình công',
   registerHistory: 'Lịch sử đăng ký',
   loginError: 'Đăng nhập thất bại',
+  noData: 'Không có dữ liệu để hiển thị',
 
   ok: 'OK',
   hello: 'Xin chào',
@@ -57,6 +58,13 @@ const translationVi = {
   remainingLeave: 'Ngày phép còn lại',
   selectDate: 'Chọn ngày',
   reasonPlaceholder: 'Vui lòng nhập lý do',
+  hourFrom: 'Từ giờ',
+  hourTo: 'Tới giờ',
+  hourFromPlaceholder: 'Giờ bắt đầu ',
+  hourToPlaceholder: 'Giờ kết thúc',
+  totalHourOverTimeOnMonth: 'Tổng số giờ làm thêm trong tháng',
+  totalHourOverTimeOnYear: 'Tổng số giờ làm thêm trong năm',
+  confirm: 'Xác nhận',
 } as const;
 
 const translationEn = {
@@ -117,6 +125,14 @@ const translationEn = {
   selectDate: 'Select date',
   reasonPlaceholder: 'Please enter reason',
   remainingLeave: 'Remaining leave',
+  hourFrom: 'Hour from',
+  hourTo: 'Hour to',
+  hourFromPlaceholder: 'Start time',
+  hourToPlaceholder: 'End time',
+  totalHourOverTimeOnMonth: 'Total hour overtime on month',
+  totalHourOverTimeOnYear: 'Total hour overtime on year',
+  noData: 'No data to display',
+  confirm: 'Confirm',
 } as const;
 
 export const translations = {
@@ -125,7 +141,7 @@ export const translations = {
 } as const;
 
 export type LanguageCode = keyof typeof translations;
-export type TranslationKey = keyof (typeof translationVi);
+export type TranslationKey = keyof typeof translationVi;
 
 export const languageDisplayNames: Record<LanguageCode, string> = {
   vi: 'Tiếng Việt',

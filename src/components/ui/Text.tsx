@@ -1,5 +1,10 @@
 import React from 'react';
-import { Text as RNText, TextProps as RNTextProps, StyleSheet, TextStyle } from 'react-native';
+import {
+  Text as RNText,
+  TextProps as RNTextProps,
+  StyleSheet,
+  TextStyle,
+} from 'react-native';
 import { Colors } from '@/constants/colors';
 import { FontSize } from '@/constants/dimens';
 import { Fonts } from '@/constants/fonts';
@@ -16,7 +21,14 @@ type TextVariant =
   | 'caption';
 
 type TextColor = 'primary' | 'secondary' | 'tertiary' | 'inverse';
-type TextWeight = 'bold' | 'semibold' | 'medium' | 'regular' | 'light' | 'thin' | 'black';
+type TextWeight =
+  | 'bold'
+  | 'semibold'
+  | 'medium'
+  | 'regular'
+  | 'light'
+  | 'thin'
+  | 'black';
 
 export interface AppTextProps extends RNTextProps {
   variant?: TextVariant;
@@ -75,15 +87,21 @@ export const AppText = React.memo<AppTextProps>(
         accessible={accessible}
         accessibilityRole={accessibilityRole || defaultRole}
         testID={testID || `text-${variant}`}
-        style={[styles.base, variantStyle, colorStyle, fontWeightStyle, additionalStyles, style]}
+        style={[
+          styles.base,
+          variantStyle,
+          colorStyle,
+          fontWeightStyle,
+          additionalStyles,
+          style,
+        ]}
         {...rest}
       >
         {children}
       </RNText>
     );
-  }
+  },
 );
-
 
 const styles = StyleSheet.create({
   base: {

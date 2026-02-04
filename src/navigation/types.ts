@@ -15,9 +15,12 @@ export type MainTabParamList = {
 
 export type MainStackParamList = {
   MainTabs: NavigatorScreenParams<MainTabParamList>;
-  Register: undefined;  
-  Approve:undefined;
-  RegisterLeave:undefined;
+  Register: undefined;
+  Approve: undefined;
+  RegisterLeave: undefined;
+  RegisterOvertime: undefined;
+  RegisterExplanation: undefined;
+  RegisterHistory: undefined;
 };
 
 export type RootStackParamList = {
@@ -27,7 +30,6 @@ export type RootStackParamList = {
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList { }
+    interface RootParamList extends RootStackParamList {}
   }
 }
-

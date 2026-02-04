@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { AppText } from './Text';
 import { Colors } from '@/constants/colors';
-import {  FontSize, Spacing } from '@/constants/dimens';
+import { FontSize, Spacing } from '@/constants/dimens';
 import AppStyles from '@/style';
 
 export type ButtonVariant =
@@ -32,6 +32,7 @@ export interface AppButtonProps extends Omit<TouchableOpacityProps, 'style'> {
   style?: ViewStyle;
   textStyle?: TextStyle;
   onPress?: (event: GestureResponderEvent) => void;
+  textColor?: string;
 }
 
 const DEFAULT_VARIANT: ButtonVariant = 'primary';
@@ -109,6 +110,7 @@ export const AppButton = React.memo<AppButtonProps>(
     style,
     textStyle: customTextStyle,
     onPress,
+    textColor,
     ...rest
   }) => {
     const isDisabled = disabled || loading;
@@ -157,9 +159,14 @@ export const AppButton = React.memo<AppButtonProps>(
     ) : (
       <View style={[AppStyles.f_Row, AppStyles.a_center, AppStyles.j_center]}>
         {icon &&
-          (iconOnly ? icon : <View style={AppStyles.marginRight8}>{icon}</View>)}
+          (iconOnly ? (
+            icon
+          ) : (
+            <View style={AppStyles.marginRight8}>{icon}</View>
+          ))}
         {label != null && label !== '' && (
           <AppText
+            color={textColor}
             center
             style={[textStyle, customTextStyle]}
             numberOfLines={1}
@@ -195,5 +202,4 @@ const styles = StyleSheet.create({
   base: {
     overflow: 'hidden',
   },
-
 });

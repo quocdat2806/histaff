@@ -74,7 +74,7 @@ function SvgNotification(props: SvgProps) {
     </Svg>
   );
 }
-function SvgGPS(props: SvgProps) {
+function SvgGPS() {
   const color = '#0E96EB';
   return (
     <Svg width="75" height="75" viewBox="0 0 75 75" fill="none">
@@ -102,7 +102,7 @@ function SvgGPS(props: SvgProps) {
   );
 }
 
-function SvgBusinessCard(props: SvgProps) {
+function SvgBusinessCard() {
   return (
     <Svg width="33" height="33" viewBox="0 0 33 33" fill="none">
       <Path
@@ -112,8 +112,7 @@ function SvgBusinessCard(props: SvgProps) {
     </Svg>
   );
 }
-function SvgRegister(props: SvgProps) {
-  const { color = '#007CFA' } = props;
+function SvgRegister() {
   return (
     <Svg width="28" height="28" viewBox="0 0 28 28" fill="none">
       <Path
@@ -123,8 +122,7 @@ function SvgRegister(props: SvgProps) {
     </Svg>
   );
 }
-function SvgApproval(props: SvgProps) {
-  const { color = '#FE9400' } = props;
+function SvgApproval() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -134,8 +132,7 @@ function SvgApproval(props: SvgProps) {
     </Svg>
   );
 }
-function SvgSalary(props: SvgProps) {
-  const { color = 'white' } = props;
+function SvgSalary() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -145,8 +142,7 @@ function SvgSalary(props: SvgProps) {
     </Svg>
   );
 }
-function SvgTimeSheet(props: SvgProps) {
-  const { color = 'white' } = props;
+function SvgTimeSheet() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -156,8 +152,7 @@ function SvgTimeSheet(props: SvgProps) {
     </Svg>
   );
 }
-function SvgNew(props: SvgProps) {
-  const { color = 'white' } = props;
+function SvgNew() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -167,9 +162,7 @@ function SvgNew(props: SvgProps) {
     </Svg>
   );
 }
-function SvgChat(props: SvgProps) {
-  const { color = 'white' } = props;
-
+function SvgChat() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -179,9 +172,7 @@ function SvgChat(props: SvgProps) {
     </Svg>
   );
 }
-function SvgGps(props: SvgProps) {
-  const { color = 'white' } = props;
-
+function SvgGps() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -191,9 +182,7 @@ function SvgGps(props: SvgProps) {
     </Svg>
   );
 }
-function SvgSurvey(props: SvgProps) {
-  const { color = 'white' } = props;
-
+function SvgSurvey() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -300,9 +289,7 @@ function SvgInsurance(props: SvgProps) {
   );
 }
 
-function SvgActionLeave(props: SvgProps) {
-  const { color = 'white' } = props;
-
+function SvgActionLeave() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -313,9 +300,7 @@ function SvgActionLeave(props: SvgProps) {
   );
 }
 
-function SvgActionOT(props: SvgProps) {
-  const { color = 'white' } = props;
-
+function SvgActionOT() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -326,9 +311,7 @@ function SvgActionOT(props: SvgProps) {
   );
 }
 
-function SvgActionExplanation(props: SvgProps) {
-  const { color = 'white' } = props;
-
+function SvgActionExplanation() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -339,9 +322,7 @@ function SvgActionExplanation(props: SvgProps) {
   );
 }
 
-function SvgActionHistory(props: SvgProps) {
-  const { color = 'white' } = props;
-
+function SvgActionHistory() {
   return (
     <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
       <Path
@@ -358,42 +339,88 @@ function SvgRadioButtonChecked(props: SvgProps) {
   return (
     <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
       <Rect x="0.5" y="0.5" width="19" height="19" rx="9.5" fill="#E2F2FF" />
-      <Rect
-        x="0.5"
-        y="0.5"
-        width="19"
-        height="19"
-        rx="9.5"
-        stroke={color}
-      />
+      <Rect x="0.5" y="0.5" width="19" height="19" rx="9.5" stroke={color} />
       <Circle cx="10" cy="10" r="4" fill={color} />
     </Svg>
   );
 }
-function SvgRadioNotChecked (){
+function SvgRadioNotChecked() {
   return (
     <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-<Rect
-  x="0.5"
-  y="0.5"
-  width="19"
-  height="19"
-  rx="9.5"
-  fill="white"
-/>
-<Rect
-  x="0.5"
-  y="0.5"
-  width="19"
-  height="19"
-  rx="9.5"
-  stroke="#D0D5DD"
-/>
-</Svg>
-  )
+      <Rect x="0.5" y="0.5" width="19" height="19" rx="9.5" fill="white" />
+      <Rect x="0.5" y="0.5" width="19" height="19" rx="9.5" stroke="#D0D5DD" />
+    </Svg>
+  );
 }
-
-
+function SvgCalendar() {
+  return (
+    <Svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <Path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12ZM12 6C12.5523 6 13 6.44772 13 7V11H17C17.5523 11 18 11.4477 18 12C18 12.5523 17.5523 13 17 13H12C11.4477 13 11 12.5523 11 12V7C11 6.44772 11.4477 6 12 6Z"
+        fill="#cccccc"
+      />
+    </Svg>
+  );
+}
+function SvgChevronDown(props: SvgProps) {
+  const { color = '#4B4B4D' } = props;
+  return (
+    <Svg width="12" height="7" viewBox="0 0 12 7" fill="none">
+      <Path
+        d="M1 1L6 6L11 1"
+        stroke={color}
+        strokeWidth={2.3}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
+function SvgNext() {
+  return (
+    <Svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+      <Path
+        d="M1 11L6 6L1 1"
+        stroke="#8B8B8B"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </Svg>
+  );
+}
+function SvgSuccess() {
+  return (
+    <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <Path
+        d="M16.815 3C9.20108 3 3.00003 9.20105 3.00003 16.815C3.00003 24.4289 9.20108 30.63 16.815 30.63C24.429 30.63 30.63 24.4289 30.63 16.815C30.63 9.20105 24.429 3 16.815 3ZM16.815 5.51182C23.07 5.51182 28.1182 10.56 28.1182 16.815C28.1182 23.07 23.07 28.1182 16.815 28.1182C10.56 28.1182 5.51185 23.07 5.51185 16.815C5.51185 10.56 10.56 5.51182 16.815 5.51182ZM23.6048 12.0268L15.5591 20.0333L11.4382 15.9123L9.6328 17.7177L14.6564 22.7413L15.5591 23.6048L16.4618 22.7413L25.3709 13.793L23.6048 12.0268Z"
+        fill="#00CA95"
+      />
+    </Svg>
+  );
+}
+function SvgReject() {
+  return (
+    <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <Path
+        d="M17 3.1875C9.38403 3.1875 3.1875 9.38403 3.1875 17C3.1875 24.616 9.38403 30.8125 17 30.8125C24.616 30.8125 30.8125 24.616 30.8125 17C30.8125 9.38403 24.616 3.1875 17 3.1875ZM17 5.3125C23.4663 5.3125 28.6875 10.5337 28.6875 17C28.6875 23.4663 23.4663 28.6875 17 28.6875C10.5337 28.6875 5.3125 23.4663 5.3125 17C5.3125 10.5337 10.5337 5.3125 17 5.3125ZM12.9824 11.4551L11.4551 12.9824L15.4727 17L11.4551 21.0176L12.9824 22.5449L17 18.5273L21.0176 22.5449L22.5449 21.0176L18.5273 17L22.5449 12.9824L21.0176 11.4551L17 15.4727L12.9824 11.4551Z"
+        fill="#F96472"
+      />
+    </Svg>
+  );
+}
+function SvgWaiting() {
+  return (
+    <Svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+      <Path
+        d="M16.8125 3C9.20068 3 3 9.20068 3 16.8125C3 24.4243 9.20068 30.625 16.8125 30.625C24.4243 30.625 30.625 24.4243 30.625 16.8125C30.625 9.20068 24.4243 3 16.8125 3ZM16.8125 5.125C23.2788 5.125 28.5 10.3462 28.5 16.8125C28.5 23.2788 23.2788 28.5 16.8125 28.5C10.3462 28.5 5.125 23.2788 5.125 16.8125C5.125 10.3462 10.3462 5.125 16.8125 5.125ZM9.375 15.75V17.875H24.25V15.75H9.375Z"
+        fill="#F8964A"
+      />
+    </Svg>
+  );
+}
 
 export {
   SvgHidePass,
@@ -423,8 +450,14 @@ export {
   SvgActionOT,
   SvgActionExplanation,
   SvgActionHistory,
-  SvgRadioButtonChecked, 
+  SvgRadioButtonChecked,
   SvgRadioNotChecked,
+  SvgCalendar,
+  SvgChevronDown,
+  SvgNext,
+  SvgSuccess,
+  SvgReject,
+  SvgWaiting,
   CheckIcon,
   WarningIcon,
   InfoIcon,

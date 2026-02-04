@@ -59,5 +59,3 @@ export const ReactQueryProvider = ({ children }: PropsWithChildren) => {
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
-
-

@@ -8,7 +8,10 @@ import { Colors } from '@/constants/colors';
 interface FormWrapperProps<TValues extends Record<string, any>> {
   schema: AnyObjectSchema;
   initialValues: TValues;
-  onSubmit: (values: TValues, helpers: FormikHelpers<TValues>) => void | Promise<void>;
+  onSubmit: (
+    values: TValues,
+    helpers: FormikHelpers<TValues>,
+  ) => void | Promise<void>;
   children: (formikProps: FormikProps<TValues>) => React.ReactNode;
   validateOnChange?: boolean;
   validateOnBlur?: boolean;
@@ -36,13 +39,12 @@ export const FormWrapper = <TValues extends Record<string, any>>({
       validateOnMount={validateOnMount}
       enableReinitialize={enableReinitialize}
     >
-      {(formikProps) => children(formikProps)}
+      {formikProps => children(formikProps)}
     </Formik>
   );
 };
 
 interface FormFieldProps {
-  name: string;
   label?: string;
   error?: string;
   touched?: boolean;
@@ -51,7 +53,6 @@ interface FormFieldProps {
 }
 
 export const FormField: React.FC<FormFieldProps> = ({
-  name,
   label,
   error,
   touched,
@@ -61,9 +62,9 @@ export const FormField: React.FC<FormFieldProps> = ({
   const showError = touched && error;
 
   return (
-    <View >
+    <View>
       {label && (
-        <AppText  fontType="medium" >
+        <AppText fontType="medium">
           {label}
           {required && <AppText color={Colors.error}> *</AppText>}
         </AppText>
@@ -80,7 +81,7 @@ export const FormField: React.FC<FormFieldProps> = ({
 
 export const getFieldProps = <T extends Record<string, any>>(
   formik: FormikProps<T>,
-  fieldName: keyof T & string
+  fieldName: keyof T & string,
 ) => {
   return {
     value: formik.values[fieldName],
@@ -92,7 +93,7 @@ export const getFieldProps = <T extends Record<string, any>>(
 };
 
 export const getSubmitButtonProps = <T extends Record<string, any>>(
-  formik: FormikProps<T>
+  formik: FormikProps<T>,
 ) => {
   return {
     onPress: formik.handleSubmit,

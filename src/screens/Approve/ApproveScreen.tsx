@@ -21,7 +21,5 @@ export const APPROVE_ACTIONS: ActionListItemConfig[] = [
 ];
 export const ApproveScreen = () => {
   const { t } = useTranslation();
-  return (
-    <ActionListScreen titleHeader={t('approve')} data={APPROVE_ACTIONS} />
-  );
+  return <ActionListScreen titleHeader={t('approve')} data={APPROVE_ACTIONS} />;
 };

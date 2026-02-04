@@ -2,19 +2,29 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { AppText } from '@/components/ui';
 import AppStyles from '@/style';
+import { SvgNext } from '@assets/svgs';
 export interface ActionListItemConfig {
   id: string;
   title: string;
   onPress?: () => void;
   icon?: React.ReactNode;
+  subTitle?: string;
 }
 export const ActionListItem: React.FC<ActionListItemConfig> = ({
   title,
   onPress,
   icon,
+  subTitle,
 }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={[AppStyles.backGroundWhite, AppStyles.borderRadius8, AppStyles.marginBottom12]}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[
+        AppStyles.backGroundWhite,
+        AppStyles.borderRadius8,
+        AppStyles.marginBottom12,
+      ]}
+    >
       <View
         style={[
           AppStyles.f_Row,
@@ -25,9 +35,11 @@ export const ActionListItem: React.FC<ActionListItemConfig> = ({
         ]}
       >
         {icon}
-        <AppText fontType="medium" style={AppStyles.f_1}>
-          {title}
-        </AppText>
+        <View style={[AppStyles.f_1]}>
+          <AppText fontType="medium">{title}</AppText>
+          {subTitle && <AppText variant="caption">{subTitle}</AppText>}
+        </View>
+        <SvgNext />
       </View>
     </TouchableOpacity>
   );

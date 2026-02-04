@@ -380,7 +380,7 @@ const AppStyles = StyleSheet.create({
   borderDisabled: {
     borderColor: Colors.disabled,
   },
-  border0:{
+  border0: {
     borderWidth: 0,
   },
   border1: {
