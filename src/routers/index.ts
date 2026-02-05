@@ -16,5 +16,11 @@ const ROUTERS = {
   RegisterOvertime: 'RegisterOvertime',
   RegisterExplanation: 'RegisterExplanation',
   RegisterHistory: 'RegisterHistory',
+  ApproveLeave: 'ApproveLeave',
+  ApproveOverTime: 'ApproveOverTime',
+  ApproveExplain: 'ApproveExplain',
+  ApproveHistory: 'ApproveHistory',
+  RegisterHistoryDetail: 'RegisterHistoryDetail',
+  ApproveHistoryDetail: 'ApproveHistoryDetail',
 } as const;
 export default ROUTERS;

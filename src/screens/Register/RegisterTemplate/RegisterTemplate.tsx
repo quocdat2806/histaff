@@ -25,7 +25,7 @@ export interface RegisterTemplateProps<T extends RegisterFormBase> {
   onOpenCalendarFrom: (formik: FormikProps<T>) => void;
   onOpenCalendarTo: (formik: FormikProps<T>) => void;
   middleSlot: (formik: FormikProps<T>) => React.ReactNode;
-  footerSlot?: (formik: FormikProps<T>) => React.ReactNode;
+  footerSlot?: React.ReactNode;
 }
 
 export function RegisterTemplate<T extends RegisterFormBase>({
@@ -49,7 +49,7 @@ export function RegisterTemplate<T extends RegisterFormBase>({
           onSubmit={onSubmit}
           validateOnMount
         >
-          {formik => (
+          {(formik) => (
             <View style={[AppStyles.f_1, AppStyles.gap16]}>
               <View style={[AppStyles.f_Row, AppStyles.gap12]}>
                 <PickerItem
@@ -77,14 +77,14 @@ export function RegisterTemplate<T extends RegisterFormBase>({
                 multiline
                 numberOfLines={4}
                 value={formik.values.reason}
-                onChangeText={text => formik.setFieldValue('reason', text)}
+                onChangeText={(text) => formik.setFieldValue('reason', text)}
               />
               <AppButton
                 label={t('sendApprove')}
                 {...getSubmitButtonProps(formik)}
               />
 
-              {footerSlot?.(formik)}
+              {footerSlot}
             </View>
           )}
         </FormWrapper>

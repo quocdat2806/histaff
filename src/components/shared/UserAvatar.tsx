@@ -67,7 +67,6 @@ export const UserAvatar: React.FC<UserAvatarProps> = ({
               backgroundColor: statusColor,
               borderColor: badgeBorderColor,
               borderWidth: badgeBorderWidth,
-           
             },
           ]}
         />
@@ -85,5 +84,4 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
   },
-
 });

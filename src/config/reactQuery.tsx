@@ -41,8 +41,8 @@ const useAppStateListener = () => {
 
 const useOnlineManager = () => {
   useEffect(() => {
-    return onlineManager.setEventListener(setOnline => {
-      const unsubscribe = NetInfo.addEventListener(state => {
+    return onlineManager.setEventListener((setOnline) => {
+      const unsubscribe = NetInfo.addEventListener((state) => {
         setOnline(Boolean(state.isConnected));
       });
 

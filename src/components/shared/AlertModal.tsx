@@ -1,8 +1,7 @@
 import React from 'react';
 import { Modal, View, TouchableOpacity, StyleSheet } from 'react-native';
 
-import { AppText } from '@/components/ui';
-import { AppButton } from '@/components/ui';
+import { AppText, AppButton } from '@/components/ui';
 import AppStyles from '@/style';
 
 export interface ModalAction {

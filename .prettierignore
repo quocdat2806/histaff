@@ -12,3 +12,12 @@ vendor
 .git
 .gitignore
 .gitignore
+README.md
+babel.config.js
+.eslintrc.js
+.prettierrc.js
+declarations.d.ts
+package.json
+package-lock.json
+jest.config.js
+metro.config.js

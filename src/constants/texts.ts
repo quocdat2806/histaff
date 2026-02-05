@@ -65,6 +65,21 @@ const translationVi = {
   totalHourOverTimeOnMonth: 'Tổng số giờ làm thêm trong tháng',
   totalHourOverTimeOnYear: 'Tổng số giờ làm thêm trong năm',
   confirm: 'Xác nhận',
+  reject: 'Từ chối',
+  nameStaff: 'Tên nhân viên',
+  registerDate: 'Ngày đăng ký',
+  registerType: 'Loại đăng ký',
+  startDate: 'Ngày bắt đầu',
+  endDate: 'Ngày kết thúc',
+  reson: 'Lý do',
+  attendanceSheet: 'Bảng công',
+  salarySheet: 'Phiếu lương',
+  news: 'Tin tức',
+  gps: 'GPS',
+  survey: 'Khảo sát',
+  chat: 'Chat',
+  registerHistoryDetail: 'Chi tiết lịch sử đăng ký',
+  approveHistoryDetail: 'Chi tiết lịch sử phê duyệt',
 } as const;
 
 const translationEn = {
@@ -133,6 +148,21 @@ const translationEn = {
   totalHourOverTimeOnYear: 'Total hour overtime on year',
   noData: 'No data to display',
   confirm: 'Confirm',
+  reject: 'Reject',
+  nameStaff: 'Name staff',
+  registerDate: 'Register date',
+  registerType: 'Register type',
+  startDate: 'Start date',
+  endDate: 'End date',
+  reson: 'Reason',
+  attendanceSheet: 'Attendance sheet',
+  salarySheet: 'Salary sheet',
+  news: 'News',
+  gps: 'GPS',
+  survey: 'Survey',
+  chat: 'Chat',
+  registerHistoryScreen: 'Register history detail',
+  approveHistoryDetail: 'Chi tiết lịch sử phê duyệt',
 } as const;
 
 export const translations = {

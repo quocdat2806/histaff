@@ -35,7 +35,7 @@ const FCM_TOKEN =
   'euJsI0s1SWOWzxzxKdv4QP:APA91bHHQqammiAQiFwk3IUDZSWhk2rwI7nCXXSDOKJIZQ-lPGb6aRdoVzYkOvw2idtKaSRkK4TkwXdk0O9NX2sTqD5NS3uA-41Q2aWGkvg050TvHw4q-Ik';
 
 export const LoginScreen = (_props: Props) => {
-  const login = useAuthStore(state => state.login);
+  const login = useAuthStore((state) => state.login);
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
 

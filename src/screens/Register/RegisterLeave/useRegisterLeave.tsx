@@ -51,14 +51,12 @@ export const useRegisterLeave = () => {
     value,
   }));
 
-  const handleSubmit = async (_value: RegisterLeaveFormValues) => {
-    // TODO: handle submit
-  };
+  const handleSubmit = async (_value: RegisterLeaveFormValues) => {};
 
   const handleOpenTimeFrom = (formik: FormikProps<RegisterLeaveFormValues>) => {
     openTimePicker({
       defaultTime: formik.values.timeFrom || undefined,
-      onTimeChange: time => {
+      onTimeChange: (time) => {
         formik.setFieldValue('timeFrom', time);
       },
     });
@@ -67,7 +65,7 @@ export const useRegisterLeave = () => {
   const handleOpenTimeTo = (formik: FormikProps<RegisterLeaveFormValues>) => {
     openTimePicker({
       defaultTime: formik.values.timeTo || undefined,
-      onTimeChange: time => {
+      onTimeChange: (time) => {
         formik.setFieldValue('timeTo', time);
       },
     });
@@ -76,7 +74,7 @@ export const useRegisterLeave = () => {
     (formik: FormikProps<RegisterLeaveFormValues>) => {
       openCalendarPicker({
         defaultDate: formik.values.fromDate || undefined,
-        onDateChange: date => {
+        onDateChange: (date) => {
           formik.setFieldValue('fromDate', date);
         },
       });
@@ -88,7 +86,7 @@ export const useRegisterLeave = () => {
     (formik: FormikProps<RegisterLeaveFormValues>) => {
       openCalendarPicker({
         defaultDate: formik.values.toDate || undefined,
-        onDateChange: date => {
+        onDateChange: (date) => {
           formik.setFieldValue('toDate', date);
         },
       });

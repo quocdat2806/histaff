@@ -21,6 +21,12 @@ export type MainStackParamList = {
   RegisterOvertime: undefined;
   RegisterExplanation: undefined;
   RegisterHistory: undefined;
+  ApproveLeave: undefined;
+  ApproveOverTime: undefined;
+  ApproveExplain: undefined;
+  ApproveHistory: undefined;
+  RegisterHistoryDetail: undefined;
+  ApproveHistoryDetail: undefined;
 };
 
 export type RootStackParamList = {

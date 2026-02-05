@@ -22,7 +22,7 @@ export interface AppInputProps extends TextInputProps {
   onChangeText?: (text: string) => void;
 
   error?: string;
-  
+
   required?: boolean;
 
   leftIcon?: React.ReactNode;

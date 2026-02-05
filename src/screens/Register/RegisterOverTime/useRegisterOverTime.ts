@@ -52,14 +52,12 @@ export const useRegisterOvertime = () => {
     value,
   }));
 
-  const handleSubmit = async (_value: RegisterOvertimeFormValues) => {
-    // TODO: handle submit
-  };
+  const handleSubmit = async (_value: RegisterOvertimeFormValues) => {};
 
   const handleOpenTimeFrom = (formik: FormikProps<RegisterLeaveFormValues>) => {
     openTimePicker({
       defaultTime: formik.values.timeFrom || undefined,
-      onTimeChange: time => {
+      onTimeChange: (time) => {
         formik.setFieldValue('timeFrom', time);
       },
     });
@@ -68,7 +66,7 @@ export const useRegisterOvertime = () => {
   const handleOpenTimeTo = (formik: FormikProps<RegisterLeaveFormValues>) => {
     openTimePicker({
       defaultTime: formik.values.timeTo || undefined,
-      onTimeChange: time => {
+      onTimeChange: (time) => {
         formik.setFieldValue('timeTo', time);
       },
     });
@@ -77,7 +75,7 @@ export const useRegisterOvertime = () => {
     (formik: FormikProps<RegisterLeaveFormValues>) => {
       openCalendarPicker({
         defaultDate: formik.values.fromDate || undefined,
-        onDateChange: date => {
+        onDateChange: (date) => {
           formik.setFieldValue('fromDate', date);
         },
       });
@@ -89,7 +87,7 @@ export const useRegisterOvertime = () => {
     (formik: FormikProps<RegisterLeaveFormValues>) => {
       openCalendarPicker({
         defaultDate: formik.values.toDate || undefined,
-        onDateChange: date => {
+        onDateChange: (date) => {
           formik.setFieldValue('toDate', date);
         },
       });

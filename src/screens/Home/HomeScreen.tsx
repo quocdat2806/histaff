@@ -35,13 +35,11 @@ type Props = BottomTabScreenProps<MainTabParamList, 'Home'>;
 const DEFAULT_AVATAR_URL =
   'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2024/11/tai-hinh-nen-dep-mien-phi-3.jpg';
 export const HomeScreen = (_props: Props) => {
-  const user = useAuthStore(state => state.user);
+  const user = useAuthStore((state) => state.user);
   const { t } = useTranslation();
 
   const ref = React.useRef<ICarouselInstance>(null);
   const progress = useSharedValue<number>(0);
-
-
 
   const renderItem = ({ item }: { item: ImageSourcePropType }) => {
     return (
@@ -97,7 +95,7 @@ export const HomeScreen = (_props: Props) => {
         scrollEnabled={false}
         data={HOME_GRID_DATA}
         numColumns={4}
-        keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => <HomeItem item={item} />}
       />
     </SafeAreaContainer>

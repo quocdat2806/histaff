@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { AppText } from '@/components/ui/Text';
 import { AppDropdown } from '@/components/shared';
-import { SummaryRow } from '@/components/shared';
+import { RowSection } from '@/components/shared';
 import { Colors } from '@/constants/colors';
 import {
   SvgCalendar,
@@ -52,7 +52,7 @@ export const RegisterLeaveScreen = () => {
       }
       if (values.leaveType === 'declareByDay') {
         const dateKeys = getDatesInRange(values.fromDate, values.toDate);
-        return dateKeys.map(dateKey => {
+        return dateKeys.map((dateKey) => {
           const declaration = values.dailyDeclarations?.[dateKey] ?? {
             morning: '',
             afternoon: '',
@@ -64,7 +64,7 @@ export const RegisterLeaveScreen = () => {
                 <AppDropdown
                   value={declaration.morning}
                   options={workTypeOptions}
-                  onChange={value =>
+                  onChange={(value) =>
                     formik.setFieldValue(`dailyDeclarations.${dateKey}`, {
                       ...declaration,
                       morning: value,
@@ -74,7 +74,7 @@ export const RegisterLeaveScreen = () => {
                 <AppDropdown
                   value={declaration.afternoon}
                   options={workTypeOptions}
-                  onChange={value =>
+                  onChange={(value) =>
                     formik.setFieldValue(`dailyDeclarations.${dateKey}`, {
                       ...declaration,
                       afternoon: value,
@@ -155,17 +155,6 @@ export const RegisterLeaveScreen = () => {
     [renderContent, t],
   );
 
-  const footerSlot = useCallback(
-    (formik: FormikProps<RegisterLeaveFormValues>) => (
-      <View style={[AppStyles.gap8]}>
-        <SummaryRow label={t('availableLeave')} value="5" />
-        <SummaryRow label={t('usedLeave')} value="1" />
-        <SummaryRow label={t('remainingLeave')} value="3" />
-      </View>
-    ),
-    [t],
-  );
-
   return (
     <RegisterTemplate<RegisterLeaveFormValues>
       title={t('registerLeave')}
@@ -175,7 +164,15 @@ export const RegisterLeaveScreen = () => {
       onOpenCalendarFrom={handleOpenCalendar}
       onOpenCalendarTo={handleOpenCalendarEndDate}
       middleSlot={middleSlot}
-      footerSlot={footerSlot}
+      footerSlot={
+        <RowSection
+          data={[
+            { name: t('availableLeave'), value: '5' },
+            { name: t('usedLeave'), value: '1' },
+            { name: t('remainingLeave'), value: '3' },
+          ]}
+        />
+      }
     />
   );
 };

@@ -3,6 +3,9 @@ import { TouchableOpacity, View } from 'react-native';
 import { AppText } from '@/components/ui';
 import AppStyles from '@/style';
 import { SvgNext } from '@assets/svgs';
+import { useTranslation } from '@/hooks/useTranslation';
+import { TranslationKey } from '@/constants/texts';
+
 export interface ActionListItemConfig {
   id: string;
   title: string;
@@ -16,6 +19,7 @@ export const ActionListItem: React.FC<ActionListItemConfig> = ({
   icon,
   subTitle,
 }) => {
+  const { t } = useTranslation();
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -36,8 +40,12 @@ export const ActionListItem: React.FC<ActionListItemConfig> = ({
       >
         {icon}
         <View style={[AppStyles.f_1]}>
-          <AppText fontType="medium">{title}</AppText>
-          {subTitle && <AppText variant="caption">{subTitle}</AppText>}
+          <AppText fontType="medium">{t(title as TranslationKey)}</AppText>
+          {subTitle && (
+            <AppText color="secondary" variant="subtitle">
+              {subTitle}
+            </AppText>
+          )}
         </View>
         <SvgNext />
       </View>

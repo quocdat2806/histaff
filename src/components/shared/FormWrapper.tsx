@@ -39,7 +39,7 @@ export const FormWrapper = <TValues extends Record<string, any>>({
       validateOnMount={validateOnMount}
       enableReinitialize={enableReinitialize}
     >
-      {formikProps => children(formikProps)}
+      {(formikProps) => children(formikProps)}
     </Formik>
   );
 };

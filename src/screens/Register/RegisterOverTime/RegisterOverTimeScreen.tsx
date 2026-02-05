@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
-import { View, TouchableOpacity,StyleSheet } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 
 import { AppText } from '@/components/ui/Text';
-import { AppDropdown, SummaryRow } from '@/components/shared';
+import { RowSection } from '@/components/shared';
 import { Colors } from '@/constants/colors';
 import {
   SvgCalendar,
@@ -17,7 +17,6 @@ import {
   RegisterOvertimeFormValues,
 } from './useRegisterOverTime';
 import { FormikProps } from 'formik';
-import { getDatesInRange, toDisplayDate } from '@/utils/formatDate';
 import { RegisterTemplate } from '../RegisterTemplate/RegisterTemplate';
 
 export const RegisterOvertimeScreen = () => {
@@ -30,93 +29,7 @@ export const RegisterOvertimeScreen = () => {
     handleOpenCalendarEndDate,
     handleOpenTimeFrom,
     handleOpenTimeTo,
-    workTypeOptions,
   } = useRegisterOvertime();
-
-  const renderContent = useCallback(
-    (formik: FormikProps<RegisterOvertimeFormValues>) => {
-      const { values } = formik;
-
-      if (values.leaveType === 'applySameType') {
-        return (
-          <>
-            <AppDropdown
-              placeholder="Ca sáng | Chọn loại công"
-              value={'morning'}
-              options={workTypeOptions}
-              onChange={() => {}}
-            />
-            <AppDropdown
-              placeholder="Ca chiều | Chọn loại công"
-              value={'afternoon'}
-              options={workTypeOptions}
-              onChange={() => {}}
-            />
-          </>
-        );
-      }
-      if (values.leaveType === 'declareByDay') {
-        const dateKeys = getDatesInRange(values.fromDate, values.toDate);
-        return dateKeys.map(dateKey => {
-          const declaration = values.dailyDeclarations?.[dateKey] ?? {
-            morning: '',
-            afternoon: '',
-          };
-          return (
-            <View key={dateKey} style={[AppStyles.gap4]}>
-              <AppText fontType="medium">{toDisplayDate(dateKey)}</AppText>
-              <View style={[AppStyles.gap16]}>
-                <AppDropdown
-                  placeholder="Ca sáng | Chọn loại công"
-                  value={declaration.morning}
-                  options={workTypeOptions}
-                  onChange={value =>
-                    formik.setFieldValue(`dailyDeclarations.${dateKey}`, {
-                      ...declaration,
-                      morning: value,
-                    })
-                  }
-                />
-                <AppDropdown
-                  placeholder="Ca chiều | Chọn loại công"
-                  value={declaration.afternoon}
-                  options={workTypeOptions}
-                  onChange={value =>
-                    formik.setFieldValue(`dailyDeclarations.${dateKey}`, {
-                      ...declaration,
-                      afternoon: value,
-                    })
-                  }
-                />
-              </View>
-            </View>
-          );
-        });
-      }
-      if (values.leaveType === 'declareByHour') {
-        return (
-          <View style={[AppStyles.f_Row, AppStyles.gap12]}>
-            <PickerItem
-              onPress={() => handleOpenTimeFrom(formik)}
-              label={t('hourFrom')}
-              placeholder={t('hourFromPlaceholder')}
-              value={values.timeFrom}
-              iconRight={<SvgCalendar />}
-            />
-            <PickerItem
-              onPress={() => handleOpenTimeTo(formik)}
-              label={t('hourTo')}
-              placeholder={t('hourToPlaceholder')}
-              value={values.timeTo}
-              iconRight={<SvgCalendar />}
-            />
-          </View>
-        );
-      }
-      return null;
-    },
-    [handleOpenTimeFrom, handleOpenTimeTo, t, workTypeOptions],
-  );
 
   const middleSlot = useCallback(
     (formik: FormikProps<RegisterOvertimeFormValues>) => (
@@ -175,25 +88,7 @@ export const RegisterOvertimeScreen = () => {
         </TouchableOpacity>
       </>
     ),
-    [renderContent, t],
-  );
-
-  const footerSlot = useCallback(
-    () => (
-      <View style={[AppStyles.gap8]}>
-        <SummaryRow
-          textLeftStyle={styles.flex4}
-          label={t('totalHourOverTimeOnMonth')}
-          value="5"
-        />
-        <SummaryRow
-          textLeftStyle={styles.flex4}
-          label={t('totalHourOverTimeOnYear')}
-          value="1"
-        />
-      </View>
-    ),
-    [t],
+    [t, handleOpenTimeFrom, handleOpenTimeTo],
   );
 
   return (
@@ -205,14 +100,14 @@ export const RegisterOvertimeScreen = () => {
       onOpenCalendarFrom={handleOpenCalendar}
       onOpenCalendarTo={handleOpenCalendarEndDate}
       middleSlot={middleSlot}
-      footerSlot={footerSlot}
+      footerSlot={
+        <RowSection
+          data={[
+            { name: t('totalHourOverTimeOnMonth'), value: '5' },
+            { name: t('totalHourOverTimeOnYear'), value: '1' },
+          ]}
+        />
+      }
     />
   );
 };
-
-
-const styles = StyleSheet.create({
-  flex4: {
-    flex: 4,
-  },
-});
