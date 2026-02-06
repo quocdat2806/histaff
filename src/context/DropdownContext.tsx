@@ -157,7 +157,7 @@ export const DropdownProvider: React.FC<{ children: ReactNode }> = ({
                 style={[AppStyles.backGroundWhite, AppStyles.borderRadius8]}
                 onStartShouldSetResponder={() => true}
               >
-                {config.options.map(option => {
+                {config.options.map((option) => {
                   const isSelected = option.value === config.value;
                   return (
                     <TouchableOpacity

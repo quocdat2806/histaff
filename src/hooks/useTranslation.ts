@@ -17,8 +17,8 @@ interface UseTranslationResult {
 }
 
 export const useTranslation = (): UseTranslationResult => {
-  const language = useSettingsStore(state => state.language);
-  const setLanguage = useSettingsStore(state => state.setLanguage);
+  const language = useSettingsStore((state) => state.language);
+  const setLanguage = useSettingsStore((state) => state.setLanguage);
 
   const dictionary = useMemo(() => getTexts(language), [language]);
 

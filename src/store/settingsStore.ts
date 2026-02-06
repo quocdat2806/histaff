@@ -16,9 +16,9 @@ const settingsStorageKey = 'settings-storage';
 
 export const useSettingsStore = create<SettingsState>()(
   persist(
-    set => ({
+    (set) => ({
       language: defaultLanguage,
-      setLanguage: language =>
+      setLanguage: (language) =>
         set(() => ({
           language,
         })),
@@ -27,7 +27,7 @@ export const useSettingsStore = create<SettingsState>()(
           language: defaultLanguage,
         })),
       companyCode: '',
-      setCompanyCode: companyCode =>
+      setCompanyCode: (companyCode) =>
         set(() => ({
           companyCode,
         })),

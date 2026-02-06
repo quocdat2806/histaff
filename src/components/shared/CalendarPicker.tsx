@@ -74,8 +74,8 @@ export function CalendarPickerModal({
                     },
                   }}
                   onDayPress={handleDayPress}
-                  onPressArrowLeft={subtractMonth => subtractMonth()}
-                  onPressArrowRight={addMonth => addMonth()}
+                  onPressArrowLeft={(subtractMonth) => subtractMonth()}
+                  onPressArrowRight={(addMonth) => addMonth()}
                   theme={{
                     todayTextColor: Colors.primary,
                   }}

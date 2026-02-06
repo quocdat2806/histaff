@@ -14,14 +14,14 @@ interface AuthState {
 const authStorageKey = 'auth-storage';
 export const useAuthStore = create<AuthState>()(
   persist(
-    set => ({
+    (set) => ({
       user: null,
       token: null,
       isAuthenticated: false,
-      login: user => set({ user, isAuthenticated: true }),
+      login: (user) => set({ user, isAuthenticated: true }),
       logout: () => set({ user: null, token: null, isAuthenticated: false }),
-      updateUser: userData =>
-        set(state => ({
+      updateUser: (userData) =>
+        set((state) => ({
           user: state.user ? { ...state.user, ...userData } : null,
         })),
     }),

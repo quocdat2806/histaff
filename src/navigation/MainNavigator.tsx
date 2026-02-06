@@ -10,6 +10,12 @@ import { RegisterLeaveScreen } from '@/screens';
 import { RegisterOvertimeScreen } from '@/screens';
 import { RegisterExplainScreen } from '@/screens';
 import { RegisterHistoryScreen } from '@/screens';
+import { ApproveLeaveScreen } from '@/screens';
+import { ApproveOverTimeScreen } from '@/screens';
+import { ApproveExplainScreen } from '@/screens';
+import { ApproveHistoryScreen } from '@/screens';
+import { RegisterHistoryDetail } from '@/screens';
+import { ApproveHistoryDetail } from '@/screens';
 
 const Stack = createNativeStackNavigator<MainStackParamList>();
 
@@ -38,6 +44,30 @@ export const MainNavigator = () => {
       <Stack.Screen
         name={ROUTERS.RegisterHistory}
         component={RegisterHistoryScreen}
+      />
+      <Stack.Screen
+        name={ROUTERS.ApproveLeave}
+        component={ApproveLeaveScreen}
+      />
+      <Stack.Screen
+        name={ROUTERS.ApproveOverTime}
+        component={ApproveOverTimeScreen}
+      />
+      <Stack.Screen
+        name={ROUTERS.ApproveExplain}
+        component={ApproveExplainScreen}
+      />
+      <Stack.Screen
+        name={ROUTERS.ApproveHistory}
+        component={ApproveHistoryScreen}
+      />
+      <Stack.Screen
+        name={ROUTERS.ApproveHistoryDetail}
+        component={ApproveHistoryDetail}
+      />
+      <Stack.Screen
+        name={ROUTERS.RegisterHistoryDetail}
+        component={RegisterHistoryDetail}
       />
     </Stack.Navigator>
   );

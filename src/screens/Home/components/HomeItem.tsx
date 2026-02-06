@@ -3,9 +3,8 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { AppText } from '@/components/ui/Text';
 import { Colors } from '@/constants/colors';
-import { BorderRadius, Spacing, Width } from '@/constants/dimens';
+import { Width } from '@/constants/dimens';
 import AppStyles from '@/style';
-import type { MainStackParamList } from '@/navigation/types';
 import ROUTERS from '@/routers';
 import {
   SvgApproval,
@@ -18,61 +17,60 @@ import {
   SvgTimeSheet,
 } from '@assets/svgs';
 import { navigate } from '@/navigation';
-export type HomeGridRoute = Exclude<keyof MainStackParamList, 'MainTabs'>;
+import { useTranslation } from '@/hooks/useTranslation';
+import type { TranslationKey } from '@/constants/texts';
 
 export interface HomeGridItem {
   id: string;
-  title: string;
+  title: TranslationKey;
   icon: React.ReactNode;
   badge?: number;
-  route?: HomeGridRoute;
   onPress?: () => void;
 }
 
 export const HOME_GRID_DATA: HomeGridItem[] = [
   {
     id: 'register',
-    title: 'Đăng ký',
+    title: 'register',
     icon: <SvgRegister />,
     badge: 3,
-    route: 'Register',
     onPress: () => navigate(ROUTERS.Main, { screen: ROUTERS.Register }),
   },
   {
     id: 'approve',
-    title: 'Phê duyệt',
+    title: 'approve',
     icon: <SvgApproval />,
     badge: 5,
     onPress: () => navigate(ROUTERS.Main, { screen: ROUTERS.Approve }),
   },
   {
-    id: 'timesheet',
-    title: 'Bảng công',
+    id: 'attendanceSheet',
+    title: 'attendanceSheet',
     icon: <SvgTimeSheet />,
   },
   {
-    id: 'salary',
-    title: 'Phiếu lương',
+    id: 'salarySheet',
+    title: 'salarySheet',
     icon: <SvgSalary />,
   },
   {
     id: 'news',
-    title: 'Tin tức',
+    title: 'news',
     icon: <SvgNew />,
   },
   {
     id: 'gps',
-    title: 'GPS',
+    title: 'gps',
     icon: <SvgGps />,
   },
   {
     id: 'survey',
-    title: 'Khảo sát',
+    title: 'survey',
     icon: <SvgSurvey />,
   },
   {
     id: 'chat',
-    title: 'Chat',
+    title: 'chat',
     icon: <SvgChat />,
   },
 ];
@@ -82,13 +80,39 @@ interface Props {
 }
 
 const HomeItem = ({ item }: Props) => {
+  const { t } = useTranslation();
+
   return (
-    <TouchableOpacity style={[styles.container]} onPress={item.onPress}>
-      <View style={[styles.iconWrapper]}>
+    <TouchableOpacity
+      style={[
+        styles.container,
+        AppStyles.a_center,
+        AppStyles.marginBottom16,
+        AppStyles.gap8,
+      ]}
+      onPress={item.onPress}
+    >
+      <View
+        style={[
+          styles.iconWrapper,
+          AppStyles.backGroundWhite,
+          AppStyles.a_center,
+          AppStyles.j_center,
+          AppStyles.borderRadius12,
+        ]}
+      >
         {item.icon}
         {!!item.badge && (
-          <View style={[styles.badge]}>
-            <AppText variant="caption" color={Colors.white}>
+          <View
+            style={[
+              styles.badge,
+              AppStyles.backGroundError,
+              AppStyles.a_center,
+              AppStyles.j_center,
+              AppStyles.borderRadius12,
+            ]}
+          >
+            <AppText fontType="bold" variant="caption" color={Colors.white}>
               {item.badge}
             </AppText>
           </View>
@@ -96,7 +120,7 @@ const HomeItem = ({ item }: Props) => {
       </View>
 
       <AppText variant="subtitle" color={Colors.black} numberOfLines={1}>
-        {item.title}
+        {t(item.title)}
       </AppText>
     </TouchableOpacity>
   );
@@ -105,31 +129,19 @@ const HomeItem = ({ item }: Props) => {
 export default HomeItem;
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    marginBottom: Spacing.lg,
     width: Width.fullScreenDimensionWidth / 4,
-    gap: Spacing.xs,
   },
 
   iconWrapper: {
-    backgroundColor: Colors.white,
-    ...AppStyles.j_center,
-    ...AppStyles.a_center,
     width: (Width.fullScreenDimensionWidth / 4) * 0.7,
     height: (Width.fullScreenDimensionWidth / 4) * 0.7,
-    borderRadius: BorderRadius.xl,
   },
 
   badge: {
     position: 'absolute',
     top: '-10%',
     right: '-10%',
-    backgroundColor: Colors.error,
-    ...AppStyles.j_center,
-    ...AppStyles.a_center,
-    paddingHorizontal: Spacing.xxs,
     width: (Width.fullScreenDimensionWidth / 4) * 0.25,
     height: (Width.fullScreenDimensionWidth / 4) * 0.25,
-    borderRadius: BorderRadius.xl,
   },
 });

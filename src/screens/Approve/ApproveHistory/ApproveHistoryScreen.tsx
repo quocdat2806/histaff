@@ -6,35 +6,35 @@ import { Texts } from '@/constants/texts';
 import { useTranslation } from '@/hooks/useTranslation';
 import { navigate } from '@/navigation';
 import ROUTERS from '@/routers';
-export const HISTORY_REGISTER_ACTIONS: ActionListItemConfig[] = [
+export const HISTORY_APPROVE_ACTIONS: ActionListItemConfig[] = [
   {
     id: 'success',
     title: Texts.approveLeave,
     icon: <SvgSuccess />,
-    subTitle: '2026-01-01',
+    subTitle: 'Nguyen Van A',
     onPress: () =>
-      navigate(ROUTERS.Main, { screen: ROUTERS.RegisterHistoryDetail }),
+      navigate(ROUTERS.Main, { screen: ROUTERS.ApproveHistoryDetail }),
   },
   {
     id: 'reject',
     title: Texts.approveLeave,
     icon: <SvgReject />,
-    subTitle: '2026-01-01',
+    subTitle: 'Nguyen Van B',
   },
   {
     id: 'waiting',
     title: Texts.approveLeave,
     icon: <SvgWaiting />,
-    subTitle: '2026-01-01',
+    subTitle: 'Nguyen Van C',
   },
 ];
 
-export const RegisterHistoryScreen = () => {
+export const ApproveHistoryScreen = () => {
   const { t } = useTranslation();
   return (
     <ActionList
       titleHeader={t('registerHistory')}
-      data={HISTORY_REGISTER_ACTIONS}
+      data={HISTORY_APPROVE_ACTIONS}
     />
   );
 };

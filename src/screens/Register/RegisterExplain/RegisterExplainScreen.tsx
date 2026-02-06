@@ -43,7 +43,7 @@ export const RegisterExplainScreen = () => {
         </View>
       </>
     ),
-    [t],
+    [t, handleOpenTimeFrom, handleOpenTimeTo],
   );
 
   return (

@@ -24,7 +24,7 @@ export function AppDropdown<T>({
   const { openDropdown } = useDropdown();
 
   const selectedLabel = useMemo(() => {
-    return options.find(o => o.value === value)?.label;
+    return options.find((o) => o.value === value)?.label;
   }, [value, options]);
 
   const handlePress = () => {
