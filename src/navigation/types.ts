@@ -27,6 +27,8 @@ export type MainStackParamList = {
   ApproveHistory: undefined;
   RegisterHistoryDetail: undefined;
   ApproveHistoryDetail: undefined;
+  WorkSheet: undefined;
+  SalarySheet: undefined;
 };
 
 export type RootStackParamList = {

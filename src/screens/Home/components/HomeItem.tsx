@@ -44,9 +44,10 @@ export const HOME_GRID_DATA: HomeGridItem[] = [
     onPress: () => navigate(ROUTERS.Main, { screen: ROUTERS.Approve }),
   },
   {
-    id: 'attendanceSheet',
-    title: 'attendanceSheet',
+    id: 'workSheet',
+    title: 'workSheet',
     icon: <SvgTimeSheet />,
+    onPress: () => navigate(ROUTERS.Main, { screen: ROUTERS.WorkSheet }),
   },
   {
     id: 'salarySheet',

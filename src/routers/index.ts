@@ -22,5 +22,7 @@ const ROUTERS = {
   ApproveHistory: 'ApproveHistory',
   RegisterHistoryDetail: 'RegisterHistoryDetail',
   ApproveHistoryDetail: 'ApproveHistoryDetail',
+  WorkSheet: 'WorkSheet',
+  SalarySheet: 'SalarySheet',
 } as const;
 export default ROUTERS;

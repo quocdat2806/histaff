@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ROUTERS from '@/routers';
 import { MainStackParamList } from './types';
 import { TabNavigator } from './TabNavigator';
-import { RegisterScreen } from '@/screens';
+import { RegisterScreen, SalarySheetScreen, WorkSheetScreen } from '@/screens';
 import { ApproveScreen } from '@/screens';
 import { RegisterLeaveScreen } from '@/screens';
 import { RegisterOvertimeScreen } from '@/screens';
@@ -68,6 +68,14 @@ export const MainNavigator = () => {
       <Stack.Screen
         name={ROUTERS.RegisterHistoryDetail}
         component={RegisterHistoryDetail}
+      />
+      <Stack.Screen
+        name={ROUTERS.WorkSheet}
+        component={WorkSheetScreen}
+      />
+      <Stack.Screen
+        name={ROUTERS.SalarySheet}
+        component={SalarySheetScreen}
       />
     </Stack.Navigator>
   );
